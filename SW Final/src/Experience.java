@@ -3,7 +3,7 @@
  * Experience class will be the search-able object for our 
  * @author Nick
  *
- */ 
+ */
 public class Experience 
 {
 	public enum StudentStanding
@@ -27,14 +27,14 @@ public class Experience
 	private String city;
 	private String natureOfWork;
 	private String addtionalInformation;
-	private int hoursPerWeek;
-	private StudentStanding standing;
-	private CompensationType compensation;
-	private MainActivity activity;
+	private String hoursPerWeek;
+	private String standing;
+	private String compensation;
+	private String activity;
 	
 	public Experience(boolean international, boolean internship, String organization, String state, String city,
-			String natureOfWork, String addtionalInformation, int hoursPerWeek, StudentStanding standing,
-			CompensationType compensation, MainActivity activity) {
+			String natureOfWork, String hoursPerWeek, String standing,
+			String compensation, String activity) {
 		super();
 		this.international = international;
 		this.internship = internship;
@@ -77,20 +77,44 @@ public class Experience
 		return addtionalInformation;
 	}
 
-	public int getHoursPerWeek() {
+	public String getHoursPerWeek() {
 		return hoursPerWeek;
 	}
 
-	public StudentStanding getStanding() {
+	public String getStanding() {
 		return standing;
 	}
 
-	public CompensationType getCompensation() {
+	public String getCompensation() {
 		return compensation;
 	}
 
-	public MainActivity getActivity() {
+	public String getActivity() {
 		return activity;
+	}
+	
+	
+	
+	public String toString()
+	{
+		String intl = "";
+		String intern = "";
+		if(international == true)
+		{
+			intl = "International";
+		}
+		if(internship == true)
+		{
+			intl = "Internship";
+		}
+
+			
+		String configuredData = intl+", "+intern+", "+ organization+ ", "+ getActivity() +", " + state + ", " + city + ", " 
+		+ natureOfWork + ", " + addtionalInformation + ", " + getStanding() + ", " + getCompensation();
+		
+		
+		return configuredData;
+		
 	}
 	
 

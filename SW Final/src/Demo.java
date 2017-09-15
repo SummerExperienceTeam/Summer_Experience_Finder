@@ -23,24 +23,26 @@ public class Demo {
                     myFile = myFiles.openFileGUI(myFile);
                     break;
                 case 2:
-                    if (myFile == null) //Making sure a file is selected to read
-                        System.out.println("Please select a file first");
-                    else
-                    {
-                        System.out.println("Please input name to look for: DISABLED");
-                        String name = input.nextLine();
-                        //myFiles.readFile(myFile, name);
-                    }
-                    break;
-                case 3:
                     if(myFile == null)
                         System.out.println("Please select a file first");
                     else
                     {
-                        System.out.println("Defrag the experience file");
+                        System.out.println("Reading DB Demo file");
                         experiences = myFiles.openFile(myFile);
                     }
                     break;
+                case 3:
+                    if (myFile == null) //Making sure a file is selected to read
+                        System.out.println("Plea`se select a file first");
+                    else
+                    {
+                        for (int i = 0; i < experiences.size(); i++)
+                        {
+                        	System.out.println(experiences.get(i));
+                        }
+                    }
+                    break;
+               
                 case 4:
                     System.out.println("Exiting program...");
                     exit = true; 

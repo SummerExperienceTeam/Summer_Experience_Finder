@@ -86,16 +86,24 @@ public class FileHandler
 				String line[] = input.nextLine().split(",");
 				for(int i = 0; i < line.length; i++)
 				{
-					System.out.println("This is how our demo fields look like rn");
-					System.out.println(line[i]);
+					String studentStanding = line[0];
+					String International = line[1];
+					boolean isInternational = false; 
+					if  (International.equals("No"))
+							isInternational = false;
+					String internship = line[2];
+					boolean didInternship = false;
+					String organization = line[3];
+					String location = line[4];
+					String city = line[5];
+					String natureOfWork = line[6];
+					String hours = line[7];
+					String compensationType = line[8];
+					String mainActivity = line[9];
+					String additionalInfo = line[10];
+					
+					Experiences.add(new Experience(isInternational, didInternship, organization, city, natureOfWork, additionalInfo, hours, studentStanding, compensationType, mainActivity));
 				}
-				/*
-				String creditCardNumber = line[0];
-				String accountHolderName = line[1];
-				String type = line[2];
-				float currentBalance = Float.parseFloat(line[3]);
-				*/
-				//CardGenerator.fileToCreditCard(cards, creditCardNumber, accountHolderName, type, currentBalance);
 			}
 			input.close();
 		} catch (FileNotFoundException e) {

@@ -8,8 +8,8 @@ public class Menu_Interface
     {
         System.out.println(
 "1.     Load a text file (using a GUI).\n" +
-"2.     Search Name in File. \n" +
-"3.     Defrag the experience file:\n" +
+"2.     Opens Demo DB \n" +
+"3.     Print out Demo DB:\n" +
 "4.     Exit.\n" +
         "Please input a number corresponding to your desired option");
         Scanner numbIn = new Scanner(System.in);
