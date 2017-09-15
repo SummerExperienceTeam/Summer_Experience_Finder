@@ -3,7 +3,16 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.FlowLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -15,11 +24,12 @@ import javax.swing.ListCellRenderer;
 public class DbQuery extends JFrame {
 
 	private JPanel contentPane;
-	private JTextField lastNameTextField;
+	private JTextField databaseTextField;
 	private JButton btnSearch;
 	private JScrollPane scrollPane;    
 	private JTable table;
-	private JComboBox filterList;     
+	private JComboBox filterList;
+	FilterDb dbFilter = new FilterDb();
 	
 
 	public static void main(String[] args) {
@@ -48,9 +58,9 @@ public class DbQuery extends JFrame {
 		//JLabel enterQuery = new JLabel("Enter Query");
 		//panel.add(enterQuery);
 		
-		//lastNameTextField = new JTextField();
-		//panel.add(lastNameTextField);
-		//lastNameTextField.setColumns(10);
+		databaseTextField = new JTextField();
+		panel.add(databaseTextField);
+		databaseTextField.setColumns(10);
 		
 		//btnSearch = new JButton("Search");
 		//panel.add(btnSearch);
@@ -69,9 +79,48 @@ public class DbQuery extends JFrame {
 		panel.add(filterList);
 		
 
-		setVisible(true);
 		
 		
-	}
+		btnSearch = new JButton("Search");
+		panel.add(btnSearch);
+		btnSearch.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				// Get last name from the text field
 
-}
+				// Call DAO and get employees for the last name
+
+				// If last name is empty, then get all employees
+
+				// Print out employees				
+				List<Experience> experiences = null;
+				try {
+					String searchQuery = databaseTextField.getText();
+					
+					//experiences = null;
+
+					//if (searchQuery != null && searchQuery.trim().length() > 0) {
+						//experiences = FilterDb.searchExperiences(searchQuery);
+					//} else {
+						//experiences = FilterDb.searchExperiences(searchQuery);
+					//}
+					
+					// create the model and update the "table"
+					//Just add it or print it here wherever you want in your guy
+					//EmployeeTableModel model = new EmployeeTableModel(employees);
+					//set it to whatever you want
+					//table.setModel(model);
+					
+					experiences = FilterDb.getAllExperiences();
+					for (Experience temp : experiences) {
+						System.out.println(temp);
+					}
+					
+				} catch (Exception exc) {
+					JOptionPane.showMessageDialog(DbQuery.this, "Error: " + exc, "Error", JOptionPane.ERROR_MESSAGE); 
+				}
+				}
+			});
+		//panel.add(btnSearch);
+		setVisible(true);
+
+}}

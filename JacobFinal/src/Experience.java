@@ -8,7 +8,7 @@ public class Experience
 {
 	public enum StudentStanding
 	{
-		SOPHMORE, JUNIOR, SENIOR
+		SOPHMORE, JUNIOR, SENIOR  
 	}
 	public enum CompensationType
 	{
