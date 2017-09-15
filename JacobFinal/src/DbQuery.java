@@ -33,8 +33,20 @@ public class DbQuery extends JFrame {
 	
 
 	public static void main(String[] args) {
-		DbQuery ourGUI = new DbQuery();   
-	}
+		DbQuery ourGUI = new DbQuery();  
+	        try {
+	            // The newInstance() call is a work around for some
+	            // broken Java implementations
+
+	            Class.forName("com.mysql.jdbc.Driver").newInstance();
+	        } catch (Exception ex) {
+	            // handle the error
+	        }
+	    }
+
+
+
+
 
 	
 	public DbQuery() {
