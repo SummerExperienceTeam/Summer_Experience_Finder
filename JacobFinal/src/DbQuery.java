@@ -33,15 +33,9 @@ public class DbQuery extends JFrame {
 	
 
 	public static void main(String[] args) {
-		DbQuery ourGUI = new DbQuery();  
-	        try {
-	            // The newInstance() call is a work around for some
-	            // broken Java implementations
-
-	            Class.forName("com.mysql.jdbc.Driver").newInstance();
-	        } catch (Exception ex) {
-	            // handle the error
-	        }
+		
+	       
+	        DbQuery ourGUI = new DbQuery();  
 	    }
 
 
@@ -104,23 +98,23 @@ public class DbQuery extends JFrame {
 				// If last name is empty, then get all employees
 
 				// Print out employees				
-				List<Experience> experiences = null;
+				
 				try {
 					String searchQuery = databaseTextField.getText();
 					
-					//experiences = null;
+					List<Experience> experiences = null;
 
-					//if (searchQuery != null && searchQuery.trim().length() > 0) {
-						//experiences = FilterDb.searchExperiences(searchQuery);
-					//} else {
-						//experiences = FilterDb.searchExperiences(searchQuery);
-					//}
+					if (searchQuery != null && searchQuery.trim().length() > 0) {
+						experiences = FilterDb.searchExperiences();
+					} else {
+						experiences = FilterDb.getAllExperiences();
+					}
 					
-					// create the model and update the "table"
+					 
 					//Just add it or print it here wherever you want in your guy
-					//EmployeeTableModel model = new EmployeeTableModel(employees);
+					ExperienceTableModel model = new ExperienceTableModel(experiences);
 					//set it to whatever you want
-					//table.setModel(model);
+					table.setModel(model);
 					
 					experiences = FilterDb.getAllExperiences();
 					for (Experience temp : experiences) {
