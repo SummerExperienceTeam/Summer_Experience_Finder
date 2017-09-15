@@ -17,9 +17,9 @@ public class DbQuery extends JFrame {
 	private JPanel contentPane;
 	private JTextField lastNameTextField;
 	private JButton btnSearch;
-	private JScrollPane scrollPane;  
+	private JScrollPane scrollPane;    
 	private JTable table;
-	private JComboBox filterList;
+	private JComboBox filterList;  
 	
 
 	public static void main(String[] args) {
