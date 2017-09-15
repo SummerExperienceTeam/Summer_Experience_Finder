@@ -11,11 +11,11 @@ public class DBTestss {
 	}
 
 	@Test
-	public void testDBLength() { // test to see if pile total is more than 31 
+	public void testDBLength() { //Tests to see that the database has been created completely
 		
 	}
 	@Test
-	public void testDB() { // test to see if pile total is more than 31 
+	public void testDB() { // Ensures that the first database field is the intended first database field.
 
 	}
 	@Test

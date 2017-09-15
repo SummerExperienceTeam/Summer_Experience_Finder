@@ -16,12 +16,7 @@ public class FilterDb {
 
 public static final String PORT_NUMBER = "8889";
 
-
-
-
-
-
-
+// javadocs comments and importation of excel  file into our database
 public static List<Experience> getAllExperiences() throws Exception {
 	
 	List<Experience> list = new ArrayList<>();
@@ -104,7 +99,6 @@ public static Experience convertRowToExperience(ResultSet myResults) throws SQLE
 	String classStanding = myResults.getString("Q2");
 	String compensation = myResults.getString("Q11");
 	String activity = myResults.getString("Q12");
-	//BigDecimal salary = myResults.getBigDecimal("salary");
 	
 	Experience tempExperience = new Experience(decision, participate, org, state, city, natureOfWork, additionalInformation, hoursPerWeek, classStanding, compensation, activity);	
 	return tempExperience;

@@ -29,6 +29,7 @@ public class DbQuery extends JFrame {
 	private JScrollPane scrollPane;    
 	private JTable table;
 	private JComboBox filterList;
+	List<Experience> experiences = null;
 	FilterDb dbFilter = new FilterDb();
 	
 
@@ -98,7 +99,7 @@ public class DbQuery extends JFrame {
 				try {
 					String searchQuery = databaseTextField.getText();
 					
-					List<Experience> experiences = null;
+					experiences = null;
 
 					if (searchQuery != null && searchQuery.trim().length() > 0) {
 						experiences = FilterDb.searchExperiences();
