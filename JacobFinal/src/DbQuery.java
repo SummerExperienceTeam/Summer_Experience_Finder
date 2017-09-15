@@ -19,11 +19,11 @@ public class DbQuery extends JFrame {
 	private JButton btnSearch;
 	private JScrollPane scrollPane;    
 	private JTable table;
-	private JComboBox filterList;  
+	private JComboBox filterList;     
 	
 
 	public static void main(String[] args) {
-		DbQuery ourGUI = new DbQuery();
+		DbQuery ourGUI = new DbQuery();   
 	}
 
 	
