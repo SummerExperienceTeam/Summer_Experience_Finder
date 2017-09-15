@@ -3,7 +3,7 @@
  * Experience class will be the search-able object for our 
  * @author Nick
  *
- */
+ */ 
 public class Experience 
 {
 	public enum StudentStanding

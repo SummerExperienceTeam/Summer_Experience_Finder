@@ -1,5 +1,5 @@
 import java.util.ArrayList;
-
+ 
 /**
  * This class will take in some form of data from the File IO class and 
  * call the constructor and make experience objects. An ArrayList of Experience 
@@ -8,31 +8,28 @@ import java.util.ArrayList;
  *
  */
 public class ExperienceListCreator
-{
+{ 
 
-	
 	public Experience generateExperience()
 	{
-		Experience ex = new Experience(args);
+		Experience ex = new Experience(false, false, null, null, null, null, null, 0, null, null, null);
 		/**
 		 * ARGS for experience are... 
 		 * boolean international, boolean internship, String organization, String state, String city,
 			String natureOfWork, String addtionalInformation, int hoursPerWeek, StudentStanding standing,
 			CompensationType compensation, MainActivity activity
 		 */
-		//args will come in from whatever the FileIO spits out
-		
 		return ex;
 	}
 	
 	
-	public ArrayList<Experience> generateExperienceList(DATA)
+	public ArrayList<Experience> generateExperienceList()
 	{	
 		ArrayList<Experience> experienceList = new ArrayList<Experience>();
 		//Takes the FiloIOdata...
 		//...
 		// some loop maybe
-		experienceList.add(generateExperience(DATA));
+		experienceList.add(generateExperience());
 		
 		return experienceList;
 	}
