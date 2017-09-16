@@ -20,6 +20,12 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.ListCellRenderer;
 
+/**
+ * Displays the online database table in our GUI
+ * @author Jacob
+ *
+ */
+
 
 public class DbQuery extends JFrame {
 

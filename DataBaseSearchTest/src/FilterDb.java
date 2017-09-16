@@ -16,7 +16,10 @@ public class FilterDb {
 
 public static final String PORT_NUMBER = "8889";
 
-// javadocs comments and importation of excel  file into our database
+/**
+ * Gets all of the experiences fro the database so we can display them in our gui
+ *
+ */
 public static List<Experience> getAllExperiences() throws Exception {
 	
 	List<Experience> list = new ArrayList<>();
@@ -56,7 +59,11 @@ public static List<Experience> getAllExperiences() throws Exception {
 	return list;
 }
 
-
+/**
+ * Gets all of the experiences from our database and allows us to search them 
+ * 
+ *
+ */
 public static List<Experience> searchExperiences() throws Exception {
 	List<Experience> list = new ArrayList<>();
 
@@ -84,7 +91,10 @@ public static List<Experience> searchExperiences() throws Exception {
 		myResults.close();
 	}
 }
-
+/**
+ * Converts experiences so that they are read as a row that will can contain the differnt attributes of experiences 
+ *
+ */
 public static Experience convertRowToExperience(ResultSet myResults) throws SQLException {
 	
 	

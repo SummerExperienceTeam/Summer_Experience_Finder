@@ -1,7 +1,7 @@
 
 /**
- * Experience class will be the search-able object for our 
- * @author Nick
+ * Experience class has all of the different experiences and their attributes 
+ * 
  *
  */
 public class Experience 

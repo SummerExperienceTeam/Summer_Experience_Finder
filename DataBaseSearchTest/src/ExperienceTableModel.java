@@ -17,8 +17,8 @@ class ExperienceTableModel extends AbstractTableModel {
 			 "compensation",  "activity" };
 	private List<Experience> experiences;
 
-	public ExperienceTableModel(List<Experience> theEmployees) {
-		experiences = theEmployees;
+	public ExperienceTableModel(List<Experience> theExperiences) {
+		experiences = theExperiences;
 	}
 
 	@Override
@@ -39,19 +39,19 @@ class ExperienceTableModel extends AbstractTableModel {
 	@Override
 	public Object getValueAt(int row, int col) {
 
-		Experience tempEmployee = experiences.get(row);
+		Experience tempExperiences = experiences.get(row);
 
 		switch (col) {
 		case LAST_NAME_COL:
-			return tempEmployee.getState();
+			return tempExperiences.getState();
 		case FIRST_NAME_COL:
-			return tempEmployee.getCity();
+			return tempExperiences.getCity();
 		case EMAIL_COL:
-			return tempEmployee.getOrganization();
+			return tempExperiences.getOrganization();
 		case SALARY_COL:
-			return tempEmployee.isInternship();
+			return tempExperiences.isInternship();
 		default:
-			return tempEmployee.getState();
+			return tempExperiences.getState();
 		}
 	}
 
