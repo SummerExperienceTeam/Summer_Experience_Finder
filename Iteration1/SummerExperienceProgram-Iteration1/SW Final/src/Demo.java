@@ -8,6 +8,12 @@ public class Demo {
 	public static FileHandler myFiles;
 	public static ArrayList<Experience> experiences;
 	
+	/**
+	 * This demo interfact just interacts with the menu and our experience object
+	 * to show their initial basic functionality.
+	 * 
+	 * @param args
+	 */
 	public static void main(String[] args) {
 		myFiles = new FileHandler();
         Scanner input = new Scanner(System.in);
@@ -32,8 +38,8 @@ public class Demo {
                     }
                     break;
                 case 3:
-                    if (myFile == null) //Making sure a file is selected to read
-                        System.out.println("Plea`se select a file first");
+                    if (experiences == null) //Making sure a file is selected to read
+                        System.out.println("Please load the database first");
                     else
                     {
                         for (int i = 0; i < experiences.size(); i++)

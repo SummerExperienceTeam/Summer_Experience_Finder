@@ -10,7 +10,7 @@ import java.util.Scanner;
 import javax.swing.JFileChooser;
 
 /**
- *
+ *The following class handles the CSV files that would scale to our big MYSQL database in future iterations
  * @author Pietro
  */
 public class FileHandler 
@@ -29,10 +29,17 @@ public class FileHandler
 	public static final int Compensation = 9;
 	public static final int MainActivity = 10;
 	
+	/**
+	 * This method ensures that there is machine universality and thus
+	 * utilizes a GUI to locate the Demo File, however in the future,
+	 * allows the user to simply get new databases to pass through the program.
+	 * @param myFile
+	 * @return
+	 */
 	public File openFileGUI(File myFile)
     {
-        //JFileChooser fileGui = new JFileChooser();
-		JFileChooser fileGui = new JFileChooser("C:\\Users\\pietr\\Desktop\\SW Final");
+        JFileChooser fileGui = new JFileChooser();
+		//fileGui/JFileChooser fileGui = new JFileChooser("C:\\Users\\pietr\\Desktop\\SW Final");
 		fileGui.setDialogTitle("Please select a file to open: "); //Labelling the interface
         int result = fileGui.showOpenDialog(fileGui);
         if (result == JFileChooser.APPROVE_OPTION) 
@@ -42,50 +49,18 @@ public class FileHandler
         
         return myFile;
     }
-    //The method receive a file and the name that it should search for in the file, it on the use of newline characters.
-    public void readFile(File myFile, String Name) throws FileNotFoundException, IOException
-    {
-        
-        Scanner reader = new Scanner(myFile);
-        reader.useDelimiter("\\n");
-        boolean nameFound = false;
-        while (reader.hasNext())
-        {
-            if(reader.nextLine().equals(Name))
-            {
-                System.out.println(Name + " has been found in the file");
-                nameFound = true; 
-            }    
-        }
-        
-        if(nameFound == false)
-        {
-            System.out.println(Name + " has not been found in the file.");
-            addName(myFile, Name);
-        }    
-    }
     
-    //Method receives a file and a name as a parameter and adds any desired name to the file.
-    public void addName(File myFile, String Name) throws FileNotFoundException, IOException
-    {        
-        try(FileWriter writer = new FileWriter(myFile, true); //Initiate filewriter with a boolean signaling appending mode
-        BufferedWriter buffer = new BufferedWriter(writer); //Avoids the need to open and close a file
-        PrintWriter output = new PrintWriter(buffer)) //Enables the use of println to append an extra line to the file.
-        {
-        output.println("\n" + Name); //Adds a new line character and the name.
-        }
-        System.out.println(Name + " has been added to the list");
-        
-    }
-    
+	/**This method opens the file and initializes the Experience data objects that
+	 * will be re-factored so that these are fed to a factory strategy in a future
+	 * @param myFile
+	 * @return
+	 */
 	public ArrayList<Experience> openFile(File myFile) {
 		ArrayList<Experience> Experiences = new ArrayList<Experience>();
 		try {
 			Scanner input = new Scanner(new FileInputStream(myFile));
 			while (input.hasNextLine()) {
 				String line[] = input.nextLine().split(",");
-				for(int i = 0; i < line.length; i++)
-				{
 					String studentStanding = line[0];
 					String International = line[1];
 					boolean isInternational = false; 
@@ -101,9 +76,7 @@ public class FileHandler
 					String compensationType = line[8];
 					String mainActivity = line[9];
 					String additionalInfo = line[10];
-					
-					Experiences.add(new Experience(isInternational, didInternship, organization, city, natureOfWork, additionalInfo, hours, studentStanding, compensationType, mainActivity));
-				}
+					Experiences.add(new Experience(isInternational, didInternship, organization, city, location, natureOfWork, hours, studentStanding, compensationType, mainActivity));
 			}
 			input.close();
 		} catch (FileNotFoundException e) {
@@ -111,5 +84,4 @@ public class FileHandler
 		}
 		return Experiences;
 	}
-
 }

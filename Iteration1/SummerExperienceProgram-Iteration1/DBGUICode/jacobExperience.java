@@ -1,10 +1,11 @@
 
 /**
- * Experience class will be the search-able object for our 
+ * Experience class will be the search-able object for our database in order
+ * to instance the building blocks of "Experience" we will be searching.
  * @author Nick
  *
  */
-public class Experience 
+public class jacobExperience 
 {
 	public enum StudentStanding
 	{
@@ -20,8 +21,8 @@ public class Experience
 		CLASSOTHERINSTITUTION, RESEARCH, VOLUNTEERING
 		
 	}
-	private boolean international;
-	private boolean internship;
+	private String international;
+	private String internship;
 	private String organization;
 	private String state;
 	private String city;
@@ -32,10 +33,10 @@ public class Experience
 	private String compensation;
 	private String activity;
 	
-	public Experience(boolean international, boolean internship, String organization, String state, String city,
-			String natureOfWork, String hoursPerWeek, String standing,
-			String compensation, String activity) {
-		super();
+	public jacobExperience(String international, String internship, String organization, String state, String city,
+			String natureOfWork, String addtionalInformation, String hoursPerWeek, String standing,
+			String compensation, String activity) 
+	{
 		this.international = international;
 		this.internship = internship;
 		this.organization = organization;
@@ -49,11 +50,11 @@ public class Experience
 		this.activity = activity;
 	}
 
-	public boolean isInternational() {
+	public String isInternational() {
 		return international;
 	}
 
-	public boolean isInternship() {
+	public String isInternship() {
 		return internship;
 	}
 
@@ -91,30 +92,6 @@ public class Experience
 
 	public String getActivity() {
 		return activity;
-	}
-	
-	
-	
-	public String toString()
-	{
-		String intl = "";
-		String intern = "";
-		if(international == true)
-		{
-			intl = "International";
-		}
-		if(internship == true)
-		{
-			intl = "Internship";
-		}
-
-			
-		String configuredData = intl+", "+intern+", "+ organization+ ", "+ getActivity() +", " + state + ", " + city + ", " 
-		+ natureOfWork + ", " + addtionalInformation + ", " + getStanding() + ", " + getCompensation();
-		
-		
-		return configuredData;
-		
 	}
 	
 
