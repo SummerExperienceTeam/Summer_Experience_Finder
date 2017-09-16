@@ -9,9 +9,8 @@ public class Menu_Interface
     {
         System.out.println(
 "1.     Load a text file (using a GUI).\n" +
-"2.     Loads demo DB \n" +
-"3.     Print out Demo DB:\n" +
-"4.     Exit.\n" +
+"2.     Print out Demo DB:\n" +
+"3.     Exit.\n" +
         "Please input a number corresponding to your desired option");
         Scanner numbIn = new Scanner(System.in);
         int choice = numbIn.nextInt();

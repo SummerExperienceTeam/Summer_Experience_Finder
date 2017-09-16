@@ -4,12 +4,12 @@ import java.util.Scanner;
 
 
 public class Demo {
-	public static File myFile = null;
+	public static String myFile = "Demo File.csv";
 	public static FileHandler myFiles;
 	public static ArrayList<Experience> experiences;
 	
 	/**
-	 * This demo interfact just interacts with the menu and our experience object
+	 * This demo just interacts with the menu and our experience object
 	 * to show their initial basic functionality.
 	 * 
 	 * @param args
@@ -26,18 +26,9 @@ public class Demo {
             switch(option)
             {
                 case 1:
-                    myFile = myFiles.openFileGUI(myFile);
+                    experiences = myFiles.fileToExperiences(myFile);
                     break;
                 case 2:
-                    if(myFile == null)
-                        System.out.println("Please select a file first");
-                    else
-                    {
-                        System.out.println("Reading DB Demo file");
-                        experiences = myFiles.openFile(myFile);
-                    }
-                    break;
-                case 3:
                     if (experiences == null) //Making sure a file is selected to read
                         System.out.println("Please load the database first");
                     else
@@ -49,7 +40,7 @@ public class Demo {
                     }
                     break;
                
-                case 4:
+                case 3:
                     System.out.println("Exiting program...");
                     exit = true; 
                     break;

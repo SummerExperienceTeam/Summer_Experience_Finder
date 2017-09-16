@@ -52,13 +52,13 @@ public class FileHandler
     
 	/**This method opens the file and initializes the Experience data objects that
 	 * will be re-factored so that these are fed to a factory strategy in a future
-	 * @param myFile
+	 * @param String with fileName
 	 * @return
 	 */
-	public ArrayList<Experience> openFile(File myFile) {
+	static public ArrayList<Experience> fileToExperiences(String fileName) {
 		ArrayList<Experience> Experiences = new ArrayList<Experience>();
 		try {
-			Scanner input = new Scanner(new FileInputStream(myFile));
+			Scanner input = new Scanner(new FileInputStream(fileName));
 			while (input.hasNextLine()) {
 				String line[] = input.nextLine().split(",");
 					String studentStanding = line[0];
@@ -80,7 +80,7 @@ public class FileHandler
 			}
 			input.close();
 		} catch (FileNotFoundException e) {
-			System.out.println(myFile + "does not exist");
+			System.out.println(fileName + "is not in the folder/doesn't exist");
 		}
 		return Experiences;
 	}

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
-	<name>SW Final</name>
+	<name>Backend Demo</name>
 	<comment></comment>
 	<projects>
 	</projects>
@@ -14,11 +14,4 @@
 	<natures>
 		<nature>org.eclipse.jdt.core.javanature</nature>
 	</natures>
-	<linkedResources>
-		<link>
-			<name>SearchGUI</name>
-			<type>2</type>
-			<location>C:/Users/pietr/Desktop/Iteration1/SummerExperienceProgram-Iteration1/SearchGUI</location>
-		</link>
-	</linkedResources>
 </projectDescription>

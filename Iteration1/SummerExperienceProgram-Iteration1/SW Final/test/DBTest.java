@@ -13,35 +13,24 @@ import org.junit.Test;
  *
  */
 public class DBTest {
-
-	public static File myFile = null;
-	public static FileHandler myFiles;
-	public static ArrayList<Experience> experiences;
-	
-	
-	@Before
-	public void selectFilePath()
-	{
-		
-	}
 	
 	@Test
 	public void readsDB() //Makes sure that our demo database is read.
 	{
+		String demoFile = "Demo File.csv";
 		ArrayList<Experience> experiences = new ArrayList<>();
 		FileHandler myFiles = new FileHandler();
-		myFile = myFiles.openFileGUI(myFile);
-		experiences = myFiles.openFile(myFile);
+		experiences = myFiles.fileToExperiences(demoFile);
 		assertFalse(experiences.isEmpty());
 		
 	}
 	
 	@Test
 	public void completeDBTest() { //Ensures that we read all of the avialable files in the database.
+		String demoFile = "Demo File.csv";
 		ArrayList<Experience> experiences = new ArrayList<>();
 		FileHandler myFiles = new FileHandler();
-		myFile = myFiles.openFileGUI(myFile);
-		experiences = myFiles.openFile(myFile);
+		experiences =  myFiles.fileToExperiences(demoFile);
 		assertTrue(10==experiences.size());
 	}
 
