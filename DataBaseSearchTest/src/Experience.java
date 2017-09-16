@@ -1,7 +1,7 @@
 
 /**
  * Experience class has all of the different experiences and their attributes 
- * 
+ * it mostly consists from getters and setters
  *
  */
 public class Experience 

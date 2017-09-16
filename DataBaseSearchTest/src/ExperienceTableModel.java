@@ -3,7 +3,12 @@ import java.util.List;
 
 import javax.swing.table.AbstractTableModel;
 
-
+/**
+ * The following class was adapted from luv2code.com to fit into our summer
+ * experience project. 
+ * @author jacobnehama
+ *
+ */
 
 class ExperienceTableModel extends AbstractTableModel {
 

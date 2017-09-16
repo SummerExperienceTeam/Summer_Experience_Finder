@@ -17,7 +17,7 @@ public class FilterDb {
 public static final String PORT_NUMBER = "8889";
 
 /**
- * Gets all of the experiences fro the database so we can display them in our gui
+ * Gets all of the experiences from the database so we can display them in our gui
  *
  */
 public static List<Experience> getAllExperiences() throws Exception {

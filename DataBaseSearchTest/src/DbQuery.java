@@ -22,7 +22,8 @@ import javax.swing.ListCellRenderer;
 
 /**
  * Displays the online database table in our GUI
- * @author Jacob
+ * fetches the information from a myPHPAdmin database
+ * @author Jacob and Pietro
  *
  */
 
