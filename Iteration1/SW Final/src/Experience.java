@@ -1,6 +1,6 @@
-
 /**
- * Experience class will be the search-able object for our 
+ * Experience class will be the search-able object for our databses
+ * this will be the building block of most of our future user stories.
  * @author Nick
  *
  */
@@ -27,14 +27,14 @@ public class Experience
 	private String city;
 	private String natureOfWork;
 	private String addtionalInformation;
-	private int hoursPerWeek;
-	private StudentStanding standing;
-	private CompensationType compensation;
-	private MainActivity activity;
+	private String hoursPerWeek;
+	private String standing;
+	private String compensation;
+	private String activity;
 	
 	public Experience(boolean international, boolean internship, String organization, String state, String city,
-			String natureOfWork, String addtionalInformation, int hoursPerWeek, StudentStanding standing,
-			CompensationType compensation, MainActivity activity) {
+			String natureOfWork, String hoursPerWeek, String standing,
+			String compensation, String activity) {
 		super();
 		this.international = international;
 		this.internship = internship;
@@ -49,21 +49,6 @@ public class Experience
 		this.activity = activity;
 	}
 
-	public String getStandingString()
-	{
-		return this.standing.name();
-	}
-	
-	public String getCompensationString()
-	{
-		return this.compensation.name();
-	}
-	
-	public String getActivityString()
-	{
-		return this.activity.name();
-	}
-	
 	public boolean isInternational() {
 		return international;
 	}
@@ -92,21 +77,23 @@ public class Experience
 		return addtionalInformation;
 	}
 
-	public int getHoursPerWeek() {
+	public String getHoursPerWeek() {
 		return hoursPerWeek;
 	}
 
-	public StudentStanding getStanding() {
+	public String getStanding() {
 		return standing;
 	}
 
-	public CompensationType getCompensation() {
+	public String getCompensation() {
 		return compensation;
 	}
 
-	public MainActivity getActivity() {
+	public String getActivity() {
 		return activity;
 	}
+	
+	
 	
 	public String toString()
 	{
@@ -122,11 +109,13 @@ public class Experience
 		}
 
 			
-		String configuredData = intl+", "+intern+", "+ organization+ ", "+ getActivityString() +", " + state + ", " + city + ", " 
-		+ natureOfWork + ", " + addtionalInformation + ", " + getStandingString() + ", " + getCompensationString();
+		String configuredData = intl+", "+intern+", "+ organization+ ", "+ getActivity() +", " + state + ", " + city + ", " 
+		+ natureOfWork + ", " + addtionalInformation + ", " + getStanding() + ", " + getCompensation();
 		
 		
 		return configuredData;
 		
 	}
+	
+
 }
