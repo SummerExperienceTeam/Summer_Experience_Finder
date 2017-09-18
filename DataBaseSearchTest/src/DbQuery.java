@@ -32,6 +32,7 @@ public class DbQuery extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField databaseTextField;
+	private JTextField databaseTextField2;
 	private JButton btnSearch;
 	private JScrollPane scrollPane;    
 	private JTable table;
@@ -74,7 +75,7 @@ public class DbQuery extends JFrame {
 		
 		databaseTextField = new JTextField();
 		panel.add(databaseTextField);
-		databaseTextField.setColumns(10);
+		databaseTextField.setColumns(11);
 		
 		//btnSearch = new JButton("Search");
 		//panel.add(btnSearch);
@@ -92,7 +93,8 @@ public class DbQuery extends JFrame {
 		JComboBox filterList = new JComboBox(filterNames);
 		panel.add(filterList );
 		
-
+		databaseTextField2 = new JTextField();
+		panel.add(databaseTextField2);
 		
 		
 		btnSearch = new JButton("Search");  
@@ -100,7 +102,7 @@ public class DbQuery extends JFrame {
 		btnSearch.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				// Get data from the text field
-
+				
 				
 				
 				try {
@@ -119,15 +121,17 @@ public class DbQuery extends JFrame {
 					ExperienceTableModel model = new ExperienceTableModel(experiences);
 					//set it to whatever you want
 					table.setModel(model);
-					
+					//String output = "";
 					experiences = FilterDb.getAllExperiences();
 					for (Experience temp : experiences) {
-						System.out.println(temp);
+						System.out.print(temp);
+						
 					}
 					
 				} catch (Exception exc) {
 					JOptionPane.showMessageDialog(DbQuery.this, "Error: " + exc, "Error", JOptionPane.ERROR_MESSAGE); 
 				}
+				
 				}
 			});
 		//panel.add(btnSearch);

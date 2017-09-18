@@ -1,6 +1,4 @@
-
 import java.util.List;
-
 import javax.swing.table.AbstractTableModel;
 
 /**
@@ -12,14 +10,20 @@ import javax.swing.table.AbstractTableModel;
 
 class ExperienceTableModel extends AbstractTableModel {
 
-	private static final int LAST_NAME_COL = 0;
-	private static final int FIRST_NAME_COL = 1;
-	private static final int EMAIL_COL = 2;
-	private static final int SALARY_COL = 3;
+	private static final int CLASS_STANDING = 0;
+	private static final int INTERNATIONAL = 1;
+	private static final int INTERNSHIP = 2;
+	private static final int ORG = 3;
+	private static final int STATE = 4;
+	private static final int CITY = 5;
+	private static final int NATURE_OF_WORK = 6;
+	private static final int HOURS_PER_WEEK = 7;
+	private static final int COMPENSATION = 8;
+	
 
 	private String[] columnNames = { "international",  "internship",  "organization",  "state",  "city",
-			 "natureOfWork",  "addtionalInformation",  "hoursPerWeek",  "standing",
-			 "compensation",  "activity" };
+			 "natureOfWork", "hoursPerWeek",  "standing",
+			 "compensation" };
 	private List<Experience> experiences;
 
 	public ExperienceTableModel(List<Experience> theExperiences) {
@@ -47,16 +51,26 @@ class ExperienceTableModel extends AbstractTableModel {
 		Experience tempExperiences = experiences.get(row);
 
 		switch (col) {
-		case LAST_NAME_COL:
-			return tempExperiences.getState();
-		case FIRST_NAME_COL:
-			return tempExperiences.getCity();
-		case EMAIL_COL:
-			return tempExperiences.getOrganization();
-		case SALARY_COL:
+		case CLASS_STANDING:
+			return tempExperiences.getStanding();
+		case INTERNATIONAL:
+			return tempExperiences.isInternational();
+		case INTERNSHIP:
 			return tempExperiences.isInternship();
-		default:
+		case ORG:
+			return tempExperiences.getOrganization();
+		case STATE:
 			return tempExperiences.getState();
+		case CITY:
+			return tempExperiences.getCity();
+		case NATURE_OF_WORK:
+			return tempExperiences.getNatureOfWork();
+		case HOURS_PER_WEEK:
+			return tempExperiences.getHoursPerWeek();
+		case COMPENSATION:
+			return tempExperiences.getCompensation();
+		default:
+			return null;
 		}
 	}
 

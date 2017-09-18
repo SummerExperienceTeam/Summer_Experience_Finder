@@ -47,7 +47,8 @@ public class createDatabase {
 					"question7 varchar(500), " +
 					"question8 varchar(500), " +
 					"question9 varchar(500), " + 
-					"question10 varchar(500));";
+					"question10 varchar(500), " + 
+					"question11 varchar(500));";
 			stmt.execute(sql2);
 			return conn;
 			
@@ -90,7 +91,7 @@ public class createDatabase {
     ResultSet.CONCUR_UPDATABLE);
  
             
-            query = "LOAD DATA LOCAL INFILE '"+filename+"' INTO TABLE t1  FIELDS TERMINATED BY ',' (question1,question2,question3,question4,question5,question6,question7,question8,question9,question10)";
+            query = "LOAD DATA LOCAL INFILE '"+filename+"' INTO TABLE t1  FIELDS TERMINATED BY ',' (question1,question2,question3,question4,question5,question6,question7,question8,question9,question10,question11)";
  
             stmt.executeUpdate(query);
                  

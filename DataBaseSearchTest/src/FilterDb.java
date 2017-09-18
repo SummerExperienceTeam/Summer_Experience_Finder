@@ -36,7 +36,7 @@ public static List<Experience> getAllExperiences() throws Exception {
 	} 
 	try {
 		Connection conn = DriverManager.getConnection(
-				"jdbc:mysql://localhost:" + PORT_NUMBER + "/Experience?user=root&password=root"); // MySQL
+				"jdbc:mysql://localhost:" + PORT_NUMBER + "/Experiences?user=root&password=root"); // MySQL
 
 		// Step 2: Allocate a "Statement" object in the Connection
 		stmt = conn.createStatement();
@@ -72,7 +72,7 @@ public static List<Experience> searchExperiences() throws Exception {
 
 	try {
 		Connection conn = DriverManager.getConnection(
-				"jdbc:mysql://localhost:" + PORT_NUMBER + "/Experience?user=root&password=root"); // MySQL
+				"jdbc:mysql://localhost:" + PORT_NUMBER + "/Experiences?user=root&password=root"); // MySQL
 
 		//lastName += "%";
 		myStmt = conn.prepareStatement("select * from T1");
@@ -98,17 +98,17 @@ public static List<Experience> searchExperiences() throws Exception {
 public static Experience convertRowToExperience(ResultSet myResults) throws SQLException {
 	
 	
-	String participate = myResults.getString("Q4");
-	String decision = myResults.getString("Q3");
-	String org = myResults.getString("Q5");
-	String state = myResults.getString("Q7");
-	String city = myResults.getString("Q8");
-	String natureOfWork = myResults.getString("Q9");
-	String additionalInformation = myResults.getString("Q13");
-	String hoursPerWeek = myResults.getString("Q10");
-	String classStanding = myResults.getString("Q2");
-	String compensation = myResults.getString("Q11");
-	String activity = myResults.getString("Q12");
+	String participate = myResults.getString("question1");
+	String decision = myResults.getString("question2");
+	String org = myResults.getString("question3");
+	String state = myResults.getString("question4");
+	String city = myResults.getString("question5");
+	String natureOfWork = myResults.getString("question6");
+	String additionalInformation = myResults.getString("question7");
+	String hoursPerWeek = myResults.getString("question8");
+	String classStanding = myResults.getString("question9");
+	String compensation = myResults.getString("question10");
+	String activity = myResults.getString("question11");
 	
 	Experience tempExperience = new Experience(decision, participate, org, state, city, natureOfWork, additionalInformation, hoursPerWeek, classStanding, compensation, activity);	
 	return tempExperience;
