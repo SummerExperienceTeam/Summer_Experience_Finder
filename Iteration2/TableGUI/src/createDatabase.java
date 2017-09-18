@@ -3,6 +3,11 @@ import java.sql.DriverManager;
 import java.sql.Statement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+/**
+ * 
+ * Create database is a generic class that creates the database for our GUIs to interact with (soon to be merged)
+ *
+ */
 
 public class createDatabase {
 

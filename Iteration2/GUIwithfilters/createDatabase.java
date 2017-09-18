@@ -8,7 +8,7 @@ public class createDatabase {
 
 	public static final String PORT_NUMBER = "8889";
 	/**
-	 * Creates a database for us to work with 
+	 * Creates a database for us to work to work with in phpMYADMIN
 	 *
 	 */
 	public Connection createDatabase() {

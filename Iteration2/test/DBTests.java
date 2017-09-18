@@ -7,6 +7,14 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 
+/**
+ * 
+ * @author Pietro
+ * The DBTests are JUnit tests used to make the most out of test driven development. The tests overall check that
+ * the database is properly created and that the fields that we obtain from arbitrary experience objects is accurate.
+ *
+ */
+
 public class DBTests {
 
 	@Before

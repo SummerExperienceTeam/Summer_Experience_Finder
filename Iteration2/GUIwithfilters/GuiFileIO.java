@@ -4,7 +4,12 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Scanner;
-
+/**
+ * 
+ * @author Nick
+ * This GUIFile is a helper class used by the NewGUI class in order to get the lines in a files as a string array and loop through them
+ *
+ */
 public class GuiFileIO
 {
 	public String[] getFileLinesAsStringArray(String fileName)
