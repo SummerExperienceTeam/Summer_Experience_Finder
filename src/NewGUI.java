@@ -68,8 +68,13 @@ public class NewGUI
 	private String INTERNATIONAL_STRING = ", International Student:Yes";
 	private String INTERNSHIP_STRING = ", Internship:Yes";
 	//ColorScheme below
-	private Color colorOne = convertFXColorToSwingColor(javafx.scene.paint.Color.BLACK); //Dark
-	private Color colorTwo = convertFXColorToSwingColor(javafx.scene.paint.Color.GOLDENROD); //Light
+//	private Color colorOne = convertFXColorToSwingColor(javafx.scene.paint.Color.BLACK); //Dark
+//	private Color colorTwo = convertFXColorToSwingColor(javafx.scene.paint.Color.GOLDENROD); //Light
+//	private Color colorThree = convertFXColorToSwingColor(javafx.scene.paint.Color.BEIGE);
+//	private Color colorFour = convertFXColorToSwingColor(javafx.scene.paint.Color.GOLD);
+	
+	private Color colorOne = convertFXColorToSwingColor(javafx.scene.paint.Color.DARKSLATEGREY);
+	private Color colorTwo = convertFXColorToSwingColor(javafx.scene.paint.Color.DARKRED); //Light
 	private Color colorThree = convertFXColorToSwingColor(javafx.scene.paint.Color.BEIGE);
 	private Color colorFour = convertFXColorToSwingColor(javafx.scene.paint.Color.GOLD);
 	//Instance of utility class
@@ -83,7 +88,7 @@ public class NewGUI
 	{
 		this.experiences = experiences;
 	}
-	
+		
 	/**
 	 * This method gets the selected options of the GUI and returns them as a string.
 	 * @param state
@@ -315,12 +320,13 @@ public class NewGUI
 	}
 	
 	//For testing
-//	public static void main(String[] args)
-//	{
-//	       NewGUI gui = new NewGUI();
-//	       gui.createGUI();
-//	       
-//	}
+	public static void main(String[] args)
+	{
+		ArrayList<Experience> nullList = new ArrayList<Experience>();
+	       NewGUI gui = new NewGUI(nullList);
+	       gui.createGUI();
+	       
+	}
 }
 	
 
