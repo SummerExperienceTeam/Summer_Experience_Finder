@@ -20,8 +20,8 @@ public class Experience
 		CLASSOTHERINSTITUTION, RESEARCH, VOLUNTEERING
 		
 	}
-	private boolean international;
-	private boolean internship;
+	private String international;
+	private String internship;
 	private String organization;
 	private String state;
 	private String city;
@@ -32,7 +32,7 @@ public class Experience
 	private String compensation;
 	private String activity;
 	
-	public Experience(boolean international, boolean internship, String organization, String state, String city,
+	public Experience(String international, String internship, String organization, String state, String city,
 			String natureOfWork, String addtionalInformation, String hoursPerWeek, String standing,
 			String compensation, String activity) {
 		super();
@@ -66,12 +66,27 @@ public class Experience
 	
 	public boolean isInternational() 
 	{
-		return international;
+		if(international.equals("No"))
+		{
+			return false;
+		}
+		else
+		{
+			return true;
+		}
+		
 	}
 
 	public boolean isInternship() 
 	{
-		return internship;
+		if(internship.equals("No"))
+		{
+			return false;
+		}
+		else
+		{
+			return true;
+		}
 	}
 
 	public String getOrganization()
@@ -108,11 +123,11 @@ public class Experience
 	{
 		String intl = "";
 		String intern = "";
-		if(international == true)
+		if(international.equals("No"))
 		{
 			intl = "International, ";
 		}
-		if(internship == true)
+		if(internship.equals("Yes"))
 		{
 			intl = "Internship, ";
 		}

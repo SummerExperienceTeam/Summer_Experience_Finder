@@ -35,36 +35,48 @@ import javax.swing.JTextArea;
 import javax.swing.ListCellRenderer;
 import javax.swing.ScrollPaneLayout;
 
-//Redone GUI with GridBagLayout
+/**
+ * New and updated GUI with GridBagLayOut and up to date (09/17/2017) Experience class usage.
+ * @author Nick
+ *
+ */
 public class NewGUI
 {
 	final static boolean shouldFill = true;
     final static boolean shouldWeightX = true;
     final static boolean RIGHT_TO_LEFT = false;
 	
-    //Components as global variables. 
+    //Components as global variables for easy identification.
     private JPanel mainPane;
 	private JScrollPane scrollPane;  
-	private JTable table;
-	private JLabel experiencesLabel;
-	private JLabel searchCriteriaLabel;
 	private JFrame masterFrame; 
-	private JLabel searchCriteria;
 	private JTextArea outputText;
-	private String INTERNATIONAL_STRING = "International Student:Yes";
-	private String INTERNSHIP_STRING = "Internship:Yes";
 	
 	
+	//Selection Tools
+	private JComboBox stateList ;
+	private JComboBox studentStandingList;
+	private JComboBox compensationList;
+	private JComboBox industryList;
+	private JComboBox hoursList;
+	private JCheckBox internationalBox; 
+	private JCheckBox internshipBox ;
+	private JButton searchButton;
+	
+	
+	
+	private String INTERNATIONAL_STRING = ", International Student:Yes";
+	private String INTERNSHIP_STRING = ", Internship:Yes";
 	//ColorScheme below
-	private Color colorOne = convertFXColorToSwingColor(javafx.scene.paint.Color.BURLYWOOD); //Light Brown
-	private Color colorTwo = convertFXColorToSwingColor(javafx.scene.paint.Color.ROSYBROWN); //...
-	private Color colorThree = convertFXColorToSwingColor(javafx.scene.paint.Color.DARKBLUE);
-	private Color colorFour = convertFXColorToSwingColor(javafx.scene.paint.Color.NAVY);
-	
+	private Color colorOne = convertFXColorToSwingColor(javafx.scene.paint.Color.BLACK); //Dark
+	private Color colorTwo = convertFXColorToSwingColor(javafx.scene.paint.Color.GOLDENROD); //Light
+	private Color colorThree = convertFXColorToSwingColor(javafx.scene.paint.Color.BEIGE);
+	private Color colorFour = convertFXColorToSwingColor(javafx.scene.paint.Color.GOLD);
+	//Instance of utility class
 	private GuiFileIO guiIO = new GuiFileIO();
 	
-	
-	Experience testExperience = new Experience(true,true,"Greenpeace","California", "Monteray", 
+	//Test experience object. Not used in latest iteration. 
+	private Experience testExperience = new Experience("Yes","No","Greenpeace","California", "Monteray", 
 			"Saving the whales", "It was fun", "30", "Senior","Unpaid",
 			"Volunteering");
 	
@@ -73,26 +85,48 @@ public class NewGUI
 		//... empty constructor. 
 	}
 	
-	public String getSearchCriteria(JComboBox state, JComboBox standing, JComboBox compensationList,JComboBox mainActivityList, JCheckBox internationalBox, JCheckBox internshipBox)
+	/**
+	 * This method gets the selected options of the GUI and returns them as a string.
+	 * @param state
+	 * @param standing
+	 * @param compensationList
+	 * @param industryList
+	 * @param hoursList
+	 * @param internationalBox
+	 * @param internshipBox
+	 * @return
+	 */
+	public String getSearchCriteria(JComboBox state, JComboBox standing, JComboBox compensationList,JComboBox industryList, JComboBox hoursList,  JCheckBox internationalBox, JCheckBox internshipBox)
 	{
 		//NEED TO ATT STUFF FOR INTERNATIONAL AND INTERNSHIP BUTTONS.
 		String intl = "";
 		String intern = "";
 		if(internationalBox.isSelected())
 		{
-			intl = INTERNATIONAL_STRING + ", ";
+			intl = INTERNATIONAL_STRING + "";
 		}
 		if(internshipBox.isSelected())
 		{
 			intern = INTERNSHIP_STRING;
 		}
-		String criteriaToReturn = (String) state.getSelectedItem() +" " + (String) standing.getSelectedItem()  +" " 
-		+ (String) compensationList.getSelectedItem() +" " + (String) mainActivityList.getSelectedItem() + " " + intl + intern;
+		String criteriaToReturn = (String) state.getSelectedItem() +", " + (String) standing.getSelectedItem()  +", " 
+		+ (String) compensationList.getSelectedItem() +", " + (String) industryList.getSelectedItem() +", "+ (String) hoursList.getSelectedItem()+ intl + intern;
 		
 		return criteriaToReturn;
 	}
 	
-	public ArrayList<String> getCrieteriaList(JComboBox state, JComboBox standing, JComboBox compensationList,JComboBox mainActivityList, JCheckBox internationalBox, JCheckBox internshipBox)
+	/**
+	 * This method gets the selected options of the GUI and returns them as an ArrayList of Strings.
+	 * @param state
+	 * @param standing
+	 * @param compensationList
+	 * @param industryList
+	 * @param hoursList
+	 * @param internationalBox
+	 * @param internshipBox
+	 * @return
+	 */
+	public ArrayList<String> getCrieteriaList(JComboBox state, JComboBox standing, JComboBox compensationList,JComboBox industryList, JComboBox hoursList, JCheckBox internationalBox, JCheckBox internshipBox)
 	{
 		ArrayList<String> criteria = new ArrayList<String>();
 		if(internationalBox.isSelected())
@@ -107,10 +141,15 @@ public class NewGUI
 		criteria.add((String) state.getSelectedItem());
 		criteria.add((String) standing.getSelectedItem());
 		criteria.add((String) compensationList.getSelectedItem());
-		criteria.add((String) mainActivityList.getSelectedItem());
+		criteria.add((String) industryList.getSelectedItem());
+		criteria.add((String) hoursList.getSelectedItem());
 		
 		return criteria;
 	}
+	
+	/**
+	 * This method creates and formats the GUI.
+	 */
 	public void createGUI() 
 	{
 		
@@ -131,32 +170,29 @@ public class NewGUI
 		c.fill = GridBagConstraints.HORIZONTAL;
 		}
 		c.insets = new Insets(2,2,2,2);
-		mainPane.setBackground(Color.gray);
+		mainPane.setBackground(colorTwo);
 		
 		
-		//ADD Class Standing
-		//Remove main activity
-		//ADD hours per week
-		//ADD Industry
-		
+		//Below are all of the filters, checkBoxes, and Buttons.
+		//__________________________________________________________________________________________________________
 		String[] StateFilter =  guiIO.getFileLinesAsStringArray("States.txt");
-		JComboBox stateList = new JComboBox(StateFilter);
+		stateList = new JComboBox(StateFilter);
 		c.weightx = 0.5;
 		c.fill = GridBagConstraints.HORIZONTAL;
 		c.gridx = 0;
 		c.gridy = 0;
 		mainPane.add(stateList, c);
 		
-		String[] studentStandingFilter = { "Select Year" ,"Rising Sophmore", "Rising Junior", "Rising Senior"};
-		JComboBox studentStandingList = new JComboBox(studentStandingFilter);
+		String[] studentStandingFilter = { "Select Year" ,"Freshman", "Sophomore", "Junior"};
+		studentStandingList = new JComboBox(studentStandingFilter);
 		c.weightx = 0.5;
 		c.fill = GridBagConstraints.HORIZONTAL;
 		c.gridx = 1;
 		c.gridy = 0;
 		mainPane.add(studentStandingList, c);
 		
-		String[] compensationFilter = { "Select Financial Compensation", "Unpaid", "Paid", "Stipend"};
-		JComboBox compensationList = new JComboBox(compensationFilter);
+		String[] compensationFilter = { "Select Financial Compensation", "Unpaid", "Paid Hourly Wage", "Stipend"};
+		compensationList = new JComboBox(compensationFilter);
 		c.weightx = 0.5;
 		c.fill = GridBagConstraints.HORIZONTAL;
 		c.gridx = 2;
@@ -167,7 +203,7 @@ public class NewGUI
 				,"Consulting, Management and Human Resources","Education", "Engineering and Technology","Environment and Sustainability"
 				, "Finance, Real Estate and Insurance", "Healthcare","Public Policy, Government and Law","Scientific Research"
 				,"Sports and Outdoor Recreation", "Other"};
-		JComboBox industryList = new JComboBox(industryFilter);
+		industryList = new JComboBox(industryFilter);
 		c.weightx = 0.5; 
 		c.fill = GridBagConstraints.HORIZONTAL;
 		c.gridx = 3;
@@ -175,16 +211,14 @@ public class NewGUI
 		mainPane.add(industryList, c);
 		
 		String[] hoursFilter = {"Select Hours/Week",  "Under 15", "15-29", "30+"};
-		JComboBox hoursList = new JComboBox(hoursFilter);
+		hoursList = new JComboBox(hoursFilter);
 		c.weightx = 0.5;
 		c.fill = GridBagConstraints.HORIZONTAL;
 		c.gridx = 0;
 		c.gridy = 1;
 		mainPane.add(hoursList, c);
 		
-		
-		
-		JCheckBox internationalBox = new JCheckBox("International Students");
+		internationalBox = new JCheckBox("International Students");
 		internationalBox.setMnemonic(KeyEvent.VK_C); 
 		internationalBox.setSelected(false);
 		c.weightx = 0.5;
@@ -193,8 +227,7 @@ public class NewGUI
 		c.gridy = 1;
 		mainPane.add(internationalBox, c);
 		
-		
-		JCheckBox internshipBox = new JCheckBox("Internship");
+		internshipBox = new JCheckBox("Internships only");
 		internshipBox.setMnemonic(KeyEvent.VK_C); 
 		internshipBox.setSelected(false);
 		c.weightx = 0.5;
@@ -202,26 +235,26 @@ public class NewGUI
 		c.gridx = 2;
 		c.gridy = 1;
 		mainPane.add(internshipBox, c);
-
-		
-		
-		JButton searchButton = new JButton("Search");
+	
+		searchButton = new JButton("Search");
 		c.weightx = 0.5;
 		c.fill = GridBagConstraints.HORIZONTAL;
 		c.gridx = 4;
 		c.gridy = 0;
 		mainPane.add(searchButton, c);
 		
-		
+		//__________________________________________________________________________________________________________
+
+		//Sets up the Text are where output will go.
 		outputText = new JTextArea("");
 		outputText.setBorder(BorderFactory.createEtchedBorder(EtchedBorder.RAISED));
-		outputText.setBackground(Color.DARK_GRAY);
+		outputText.setBackground(colorOne);
 		outputText.setForeground(Color.WHITE);
 		
-		
+		//Setting up the scroll pane 
 		scrollPane = new JScrollPane(outputText);
 		scrollPane.setBorder(BorderFactory.createBevelBorder(3,colorFour, colorThree));
-		scrollPane.setBackground(Color.LIGHT_GRAY);
+		scrollPane.setBackground(colorThree);
 		scrollPane.setVisible(true);
 		c.fill = GridBagConstraints.HORIZONTAL;
 		c.ipady = 100;    
@@ -240,8 +273,8 @@ public class NewGUI
 			@Override
 			public void actionPerformed(ActionEvent e) 
 			{
-				
-				String search = getSearchCriteria(stateList, studentStandingList, compensationList, industryList, internationalBox, internshipBox);
+				//Action Listener that updates the text.
+				String search = getSearchCriteria(stateList, studentStandingList, compensationList, industryList, hoursList, internationalBox, internshipBox);
 				outputText.setText(search);;
 				mainPane.revalidate();
 				mainPane.setVisible(true);
