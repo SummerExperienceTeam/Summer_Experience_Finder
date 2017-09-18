@@ -98,24 +98,28 @@ public static List<Experience> searchExperiences() throws Exception {
 public static Experience convertRowToExperience(ResultSet myResults) throws SQLException {
 	
 	
-	String participate = myResults.getString("question1");
-	String decision = myResults.getString("question2");
-	String org = myResults.getString("question3");
-	String state = myResults.getString("question4");
-	String city = myResults.getString("question5");
-	String natureOfWork = myResults.getString("question6");
-	String additionalInformation = myResults.getString("question7");
-	String hoursPerWeek = myResults.getString("question8");
-	String classStanding = myResults.getString("question9");
-	String compensation = myResults.getString("question10");
-	String activity = myResults.getString("question11");
-	
-	Experience tempExperience = new Experience(decision, participate, org, state, city, natureOfWork, additionalInformation, hoursPerWeek, classStanding, compensation, activity);	
-	return tempExperience;
-	
 	String classStanding = myResults.getString("question1");
 	String isInternational = myResults.getString("question2");
+	String isInternship = myResults.getString("question1");
+	String getOrganization = myResults.getString("question1");
+	String getState = myResults.getString("question1");
+	String getCity = myResults.getString("question1");
+	String getNatureOfWork = myResults.getString("question1");
+	String getHoursPerWeek = myResults.getString("question1");
+	String getCompensation = myResults.getString("question1");
 	
+
+
+	Experience tempExperience = new Experience(classStanding, isInternational, isInternship, getOrganization, getState, getCity, getNatureOfWork, getHoursPerWeek); 	
+	return tempExperience;
+	
+	
+
+
+
+
+
+
 
 }
 
