@@ -36,14 +36,14 @@ public class DbQuery extends JFrame {
 	private JLabel searchCriteriaLabel;
 	
 	
-	Experience testExperience = new Experience(true,true,"Greenpeace","California", "Monteray", 
-			"Saving the whales", "It was fun", 30, Experience.StudentStanding.SENIOR, Experience.CompensationType.UNPAID,
-			Experience.MainActivity.VOLUNTEERING);
-	/*
-	 * boolean international, boolean internship, String organization, String state, String city,
-			String natureOfWork, String addtionalInformation, int hoursPerWeek, StudentStanding standing,
-			CompensationType compensation, MainActivity activity
-	 */
+//	Experience testExperience = new Experience(true,true,"Greenpeace","California", "Monteray", 
+//			"Saving the whales", "It was fun", 30, Experience.StudentStanding.SENIOR, Experience.CompensationType.UNPAID,
+//			Experience.MainActivity.VOLUNTEERING);
+//	/*
+//	 * boolean international, boolean internship, String organization, String state, String city,
+//			String natureOfWork, String addtionalInformation, int hoursPerWeek, StudentStanding standing,
+//			CompensationType compensation, MainActivity activity
+//	 */
 
 	public static void main(String[] args) {
 		DbQuery ourGUI = new DbQuery();
@@ -102,15 +102,15 @@ public class DbQuery extends JFrame {
 		contentPane.add(scrollPane, BorderLayout.CENTER);
 		
 		table = new JTable();
-		scrollPane.setViewportView(table);
-		
-		experiencesLabel = new JLabel(testExperience.toString());
-		experiencesLabel.setLayout(new GridLayout());
-		experiencesLabel.setFont(new Font("Arial", Font.BOLD, 16));
-		contentPane.add(experiencesLabel, BorderLayout.CENTER);
-		
-		
-		
+//		scrollPane.setViewportView(table);
+//		
+//		experiencesLabel = new JLabel(testExperience.toString());
+//		experiencesLabel.setLayout(new GridLayout());
+//		experiencesLabel.setFont(new Font("Arial", Font.BOLD, 16));
+//		contentPane.add(experiencesLabel, BorderLayout.CENTER);
+//		
+//		
+//		
 		
 	
 	

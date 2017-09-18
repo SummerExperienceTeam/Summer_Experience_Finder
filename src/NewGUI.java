@@ -8,7 +8,7 @@ import java.awt.Dimension;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-
+import javax.swing.border.EtchedBorder;
 
 //import javafx.scene.paint.Color;
 
@@ -18,12 +18,14 @@ import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
+import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 
 import javax.swing.JTextField;
+import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
@@ -53,6 +55,15 @@ public class NewGUI
 	private String INTERNSHIP_STRING = "Internship:Yes";
 	
 	
+	//ColorScheme below
+	private Color colorOne = convertFXColorToSwingColor(javafx.scene.paint.Color.BURLYWOOD); //Light Brown
+	private Color colorTwo = convertFXColorToSwingColor(javafx.scene.paint.Color.ROSYBROWN); //...
+	private Color colorThree = convertFXColorToSwingColor(javafx.scene.paint.Color.DARKBLUE);
+	private Color colorFour = convertFXColorToSwingColor(javafx.scene.paint.Color.NAVY);
+	
+	private GuiFileIO guiIO = new GuiFileIO();
+	
+	
 	Experience testExperience = new Experience(true,true,"Greenpeace","California", "Monteray", 
 			"Saving the whales", "It was fun", "30", "Senior","Unpaid",
 			"Volunteering");
@@ -71,7 +82,7 @@ public class NewGUI
 		{
 			intl = INTERNATIONAL_STRING + ", ";
 		}
-		if(internationalBox.isSelected())
+		if(internshipBox.isSelected())
 		{
 			intern = INTERNSHIP_STRING;
 		}
@@ -106,10 +117,10 @@ public class NewGUI
 		masterFrame = new JFrame("Database Search");
 		masterFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		masterFrame.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
-		masterFrame.setBounds(600, 600, 1200, 1200);
+		masterFrame.setBounds(0, 0, 1200, 600);
 	
 		mainPane = new JPanel();
-		mainPane.setBorder(new EmptyBorder(50, 50, 50, 50));
+		mainPane.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 		mainPane.setLayout(new GridBagLayout());
 		masterFrame.setContentPane(mainPane);
 		
@@ -119,9 +130,16 @@ public class NewGUI
 		{
 		c.fill = GridBagConstraints.HORIZONTAL;
 		}
+		c.insets = new Insets(2,2,2,2);
 		mainPane.setBackground(Color.gray);
 		
-		String[] StateFilter = { "Select State", "Alabama", "Alaska", "Arkansas", "California"};
+		
+		//ADD Class Standing
+		//Remove main activity
+		//ADD hours per week
+		//ADD Industry
+		
+		String[] StateFilter =  guiIO.getFileLinesAsStringArray("States.txt");
 		JComboBox stateList = new JComboBox(StateFilter);
 		c.weightx = 0.5;
 		c.fill = GridBagConstraints.HORIZONTAL;
@@ -135,7 +153,7 @@ public class NewGUI
 		c.fill = GridBagConstraints.HORIZONTAL;
 		c.gridx = 1;
 		c.gridy = 0;
-		mainPane.add(stateList, c);
+		mainPane.add(studentStandingList, c);
 		
 		String[] compensationFilter = { "Select Financial Compensation", "Unpaid", "Paid", "Stipend"};
 		JComboBox compensationList = new JComboBox(compensationFilter);
@@ -145,22 +163,34 @@ public class NewGUI
 		c.gridy = 0;
 		mainPane.add(compensationList, c);
 		
-		String[] mainActivityFilter = { "Select Main Activity", "Block at CC", "Music performance/study", "Time off traveling", "Study abroad"
-				,"Summer Job", "Class at another institution", "Academic research position","Volunteer/service position" };
-		JComboBox mainActivityList = new JComboBox(mainActivityFilter);
-		c.weightx = 0.5;
+		String[] industryFilter = { "Select Industry", "Arts, Media and Communications","Community Organizations/Non-Profits"
+				,"Consulting, Management and Human Resources","Education", "Engineering and Technology","Environment and Sustainability"
+				, "Finance, Real Estate and Insurance", "Healthcare","Public Policy, Government and Law","Scientific Research"
+				,"Sports and Outdoor Recreation", "Other"};
+		JComboBox industryList = new JComboBox(industryFilter);
+		c.weightx = 0.5; 
 		c.fill = GridBagConstraints.HORIZONTAL;
 		c.gridx = 3;
 		c.gridy = 0;
-		mainPane.add(mainActivityList, c);
+		mainPane.add(industryList, c);
+		
+		String[] hoursFilter = {"Select Hours/Week",  "Under 15", "15-29", "30+"};
+		JComboBox hoursList = new JComboBox(hoursFilter);
+		c.weightx = 0.5;
+		c.fill = GridBagConstraints.HORIZONTAL;
+		c.gridx = 0;
+		c.gridy = 1;
+		mainPane.add(hoursList, c);
+		
+		
 		
 		JCheckBox internationalBox = new JCheckBox("International Students");
 		internationalBox.setMnemonic(KeyEvent.VK_C); 
 		internationalBox.setSelected(false);
 		c.weightx = 0.5;
 		c.fill = GridBagConstraints.HORIZONTAL;
-		c.gridx = 4;
-		c.gridy = 0;
+		c.gridx = 1;
+		c.gridy = 1;
 		mainPane.add(internationalBox, c);
 		
 		
@@ -169,8 +199,8 @@ public class NewGUI
 		internshipBox.setSelected(false);
 		c.weightx = 0.5;
 		c.fill = GridBagConstraints.HORIZONTAL;
-		c.gridx = 5;
-		c.gridy = 0;
+		c.gridx = 2;
+		c.gridy = 1;
 		mainPane.add(internshipBox, c);
 
 		
@@ -178,15 +208,21 @@ public class NewGUI
 		JButton searchButton = new JButton("Search");
 		c.weightx = 0.5;
 		c.fill = GridBagConstraints.HORIZONTAL;
-		c.gridx = 6;
+		c.gridx = 4;
 		c.gridy = 0;
 		mainPane.add(searchButton, c);
 		
-		JPanel blankPanel = new JPanel();
-		blankPanel.setLayout(new FlowLayout());
-		blankPanel.setBorder(new EmptyBorder(50, 50, 50, 50));
-		//blankPanel.setLayout(new BorderLayout(0, 1));
-		blankPanel.setVisible(true);
+		
+		outputText = new JTextArea("");
+		outputText.setBorder(BorderFactory.createEtchedBorder(EtchedBorder.RAISED));
+		outputText.setBackground(Color.DARK_GRAY);
+		outputText.setForeground(Color.WHITE);
+		
+		
+		scrollPane = new JScrollPane(outputText);
+		scrollPane.setBorder(BorderFactory.createBevelBorder(3,colorFour, colorThree));
+		scrollPane.setBackground(Color.LIGHT_GRAY);
+		scrollPane.setVisible(true);
 		c.fill = GridBagConstraints.HORIZONTAL;
 		c.ipady = 100;    
 		c.ipadx = 100;
@@ -195,61 +231,45 @@ public class NewGUI
 		c.gridheight = 10;
 		c.gridx = 0;
 		c.gridy = 2;
-		mainPane.add(blankPanel, c);
-		JPanel blank1Panel = new JPanel();
-		blank1Panel.setLayout(new FlowLayout());
-		blank1Panel.setBorder(new EmptyBorder(50, 50, 50, 50));
-		//blankPanel.setLayout(new BorderLayout(0, 1));
-		blank1Panel.setVisible(true);
-		c.fill = GridBagConstraints.HORIZONTAL;
-		c.ipady = 100;    
-		c.ipadx = 100;
-		c.weightx = 0.0;
-		c.gridwidth = 10;
-		c.gridheight = 10;
-		c.gridx = 0;
-		c.gridy = 3;
-		mainPane.add(blank1Panel, c);
-	
-		
-		
-		
-		
-	
-		
-		
+		mainPane.add(scrollPane, c);
+		mainPane.revalidate();
+		mainPane.setVisible(true);
+		masterFrame.validate();
 		searchButton.addActionListener(new ActionListener() 
 		{
 			@Override
 			public void actionPerformed(ActionEvent e) 
 			{
-				String search = getSearchCriteria(stateList, studentStandingList, compensationList, mainActivityList, internationalBox, internshipBox);
-				outputText = new JTextArea("TOP \n"+search+"\n BOTTOM \n");
-				scrollPane = new JScrollPane(outputText);
-				scrollPane.setBorder(new EmptyBorder(50, 50, 100, 100));
-				scrollPane.setBackground(Color.DARK_GRAY);
-				//scrollPane.setBounds(500, 500, 1100, 1100);
-				//scrollPane.setLayout(new ScrollPaneLayout());
-				scrollPane.setVisible(true);
-				c.fill = GridBagConstraints.HORIZONTAL;
-				c.ipady = 100;    
-				c.ipadx = 100;
-				c.weightx = 0.0;
-				c.gridwidth = 10;
-				c.gridheight = 10;
-				c.gridx = 0;
-				c.gridy = 0;
-				mainPane.add(scrollPane, c);
+				
+				String search = getSearchCriteria(stateList, studentStandingList, compensationList, industryList, internationalBox, internshipBox);
+				outputText.setText(search);;
 				mainPane.revalidate();
 				mainPane.setVisible(true);
-
+				masterFrame.validate();
 				
-			}	
+			}
 		} );
-				
-		mainPane.setVisible(true);	
+		
 		masterFrame.setVisible(true);
 	}
+	
+	
+	/**
+	 * converts javafx colors to colors usable by swing.
+	 * @param fxColor
+	 * @return
+	 */
+	public Color convertFXColorToSwingColor(javafx.scene.paint.Color fxColor)
+	{
+		
+
+		java.awt.Color awtColor = new java.awt.Color((float) fxColor.getRed(),
+		                                             (float) fxColor.getGreen(),
+		                                             (float) fxColor.getBlue(),
+		                                             (float) fxColor.getOpacity());
+		return awtColor;
+	}
+	
 	
 	public static void main(String[] args)
 	{
