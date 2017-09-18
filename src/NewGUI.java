@@ -79,6 +79,28 @@ public class NewGUI
 	private Experience testExperience = new Experience("Yes","No","Greenpeace","California", "Monteray", 
 			"Saving the whales", "It was fun", "30", "Senior","Unpaid",
 			"Volunteering");
+	private Experience testExperience2 = new Experience("Yes","No","Greenpeace","California", "Monteray", 
+			"Saving the whales", "It was fun", "30", "Senior","Unpaid",
+			"Volunteering");
+	
+	private Experience testExperience3 = new Experience("Yes","No","Greenpeace","California", "Monteray", 
+			"Saving the whales", "It was fun", "30", "Senior","Unpaid",
+			"Volunteering");
+	
+	private Experience testExperience4 = new Experience("Yes","No","Greenpeace","California", "Monteray", 
+			"Saving the whales", "It was fun", "30", "Senior","Unpaid",
+			"Volunteering");
+	
+	private Experience testExperience5 = new Experience("Yes","No","Greenpeace","California", "Monteray", 
+			"Saving the whales", "It was fun", "30", "Senior","Unpaid",
+			"Volunteering");
+	
+	private Experience testExperience6 = new Experience("Yes","No","Greenpeace","California", "Monteray", 
+			"Saving the whales", "It was fun", "30", "Senior","Unpaid",
+			"Volunteering");
+	
+	private ArrayList<Experience> experiences = new ArrayList<Experience>();
+	
 	
 	public NewGUI()
 	{
@@ -113,6 +135,18 @@ public class NewGUI
 		+ (String) compensationList.getSelectedItem() +", " + (String) industryList.getSelectedItem() +", "+ (String) hoursList.getSelectedItem()+ intl + intern;
 		
 		return criteriaToReturn;
+	}
+	
+	public String experienceObjectListToString(ArrayList<Experience> experiences)
+	{
+		String experiencesString = "";
+		for(Experience temp: experiences)
+		{
+			experiencesString = experiencesString + temp.toString() +"\n";
+		}
+		
+		
+		return experiencesString;
 	}
 	
 	/**

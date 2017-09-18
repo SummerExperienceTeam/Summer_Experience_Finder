@@ -119,7 +119,7 @@ public class Experience
 		return hoursPerWeek;
 	}
 
-		public String toString()
+	public String toString()
 	{
 		String intl = "";
 		String intern = "";
@@ -133,8 +133,8 @@ public class Experience
 		}
 
 			
-		String configuredData = intl+intern+ organization+ ", "+ getActivityString() +", " + state + ", " + city + ", " 
-		+ natureOfWork + ", " + "Comments:"+ addtionalInformation + ", " + getStandingString() + ", " + getCompensationString();
+		String configuredData = intl+intern+ organization+ ", "+ activity +", " + state + ", " + city + ", " 
+		+ natureOfWork + ", " + "Comments:"+ addtionalInformation + ", " + standing + ", " + compensation + ", "+ hoursPerWeek;
 		
 		
 		return configuredData;
