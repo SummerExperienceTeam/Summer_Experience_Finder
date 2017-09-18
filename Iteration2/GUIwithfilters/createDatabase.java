@@ -7,7 +7,10 @@ import java.sql.SQLException;
 public class createDatabase {
 
 	public static final String PORT_NUMBER = "8889";
-	
+	/**
+	 * Creates a database for us to work with 
+	 *
+	 */
 	public Connection createDatabase() {
 		try (
 				// Step 1: Allocate a database "Connection" object
@@ -27,7 +30,11 @@ public class createDatabase {
 			return null; }
 	}
 		
-		
+	/**
+	 * creates a table in our database, adds the title "question x" to each 
+	 * 
+	 *
+	 */
 		
 	public Connection createTable() {
 		try (
@@ -45,7 +52,7 @@ public class createDatabase {
 					"question5 varchar(500), " +
 					"question6 varchar(500), " +
 					"question7 varchar(500), " +
-					"question8 varchar(500), " + 
+					"question8 varchar(500), " +
 					"question9 varchar(500));";
 			stmt.execute(sql2);
 			return conn;
@@ -57,12 +64,10 @@ public class createDatabase {
 			return null;}
 		}
 			
-
-	
-		
-		
-	
-	
+	/**
+	 * imports a csv excel file to the table in our database 
+	 *
+	 */
 	public void importData(Connection conn,String filename)
     {
 		
@@ -101,7 +106,10 @@ public class createDatabase {
         }
     }
 
-
+	/**
+	 * calls the above methods to run all the code that creates a database, table, and popoulates a database 
+	 *
+	 */
 	public static void main(String[] args) {
 		createDatabase dbCreator = new createDatabase();
 		Connection conn = dbCreator.createDatabase();
