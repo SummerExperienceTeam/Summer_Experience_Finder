@@ -2,7 +2,7 @@
 /**
  * Experience class has all of the different experiences and their attributes 
  * it mostly consists from getters and setters
- *
+ * @author Jacob and Pietro
  */
 public class Experience 
 {
@@ -20,51 +20,52 @@ public class Experience
 		CLASSOTHERINSTITUTION, RESEARCH, VOLUNTEERING
 		
 	}
-	private String international;
-	private String internship;
-	private String organization;
+	private String classStanding;
+	private String isInternational;
+	private String isInternship;
+	private String Organization;
 	private String state;
 	private String city;
 	private String natureOfWork;
-	private String addtionalInformation;
 	private String hoursPerWeek;
-	private String standing;
 	private String compensation;
-	private String activity;
-	
-	public Experience(String international, String internship, String organization, String state, String city,
-			String natureOfWork, String addtionalInformation, String hoursPerWeek, String standing,
-			String compensation, String activity) 
+
+	public Experience(String classStanding, String isInternational, String isInternship, String Organization, String state,
+			String city, String natureOfWork, String hoursPerWeek, String compensation) 
 	{
-		this.international = international;
-		this.internship = internship;
-		this.organization = organization;
+		this.classStanding = classStanding;
+		this.isInternational = isInternational;
+		this.isInternship = isInternship;
 		this.state = state;
 		this.city = city;
 		this.natureOfWork = natureOfWork;
-		this.addtionalInformation = addtionalInformation;
 		this.hoursPerWeek = hoursPerWeek;
-		this.standing = standing;
 		this.compensation = compensation;
-		this.activity = activity;
+		this.compensation = compensation;
+		
 	}
 
-	public String isInternational() {
-		return international;
+	
+	public String getClassStanding() {
+		return classStanding;
 	}
 
-	public String isInternship() {
-		return internship;
+	public String getIsInternational() {
+		return isInternational;
+	}
+
+	public String getIsInternship() {
+		return isInternship;
 	}
 
 	public String getOrganization() {
-		return organization;
+		return Organization;
 	}
 
 	public String getState() {
 		return state;
 	}
-	
+
 	public String getCity() {
 		return city;
 	}
@@ -73,25 +74,12 @@ public class Experience
 		return natureOfWork;
 	}
 
-	public String getAddtionalInformation() {
-		return addtionalInformation;
-	}
-
 	public String getHoursPerWeek() {
 		return hoursPerWeek;
 	}
 
-	public String getStanding() {
-		return standing;
-	}
-
 	public String getCompensation() {
 		return compensation;
-	}
-
-	public String getActivity() {
-		return activity;
-	}
-	
+	}	
 
 }
