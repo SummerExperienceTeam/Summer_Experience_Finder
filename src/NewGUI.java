@@ -75,36 +75,13 @@ public class NewGUI
 	//Instance of utility class
 	private GuiFileIO guiIO = new GuiFileIO();
 	
-	//Test experience object. Not used in latest iteration. 
-	private Experience testExperience = new Experience("Yes","No","Greenpeace","California", "Monteray", 
-			"Saving the whales", "It was fun", "30", "Senior","Unpaid",
-			"Volunteering");
-	private Experience testExperience2 = new Experience("Yes","No","Greenpeace","California", "Monteray", 
-			"Saving the whales", "It was fun", "30", "Senior","Unpaid",
-			"Volunteering");
-	
-	private Experience testExperience3 = new Experience("Yes","No","Greenpeace","California", "Monteray", 
-			"Saving the whales", "It was fun", "30", "Senior","Unpaid",
-			"Volunteering");
-	
-	private Experience testExperience4 = new Experience("Yes","No","Greenpeace","California", "Monteray", 
-			"Saving the whales", "It was fun", "30", "Senior","Unpaid",
-			"Volunteering");
-	
-	private Experience testExperience5 = new Experience("Yes","No","Greenpeace","California", "Monteray", 
-			"Saving the whales", "It was fun", "30", "Senior","Unpaid",
-			"Volunteering");
-	
-	private Experience testExperience6 = new Experience("Yes","No","Greenpeace","California", "Monteray", 
-			"Saving the whales", "It was fun", "30", "Senior","Unpaid",
-			"Volunteering");
-	
-	private ArrayList<Experience> experiences = new ArrayList<Experience>();
+	//List of experiences that the GUI uses
+	ArrayList<Experience> experiences = new ArrayList<Experience>();
 	
 	
-	public NewGUI()
+	public NewGUI(ArrayList<Experience> experiences)
 	{
-		//... empty constructor. 
+		this.experiences = experiences;
 	}
 	
 	/**
@@ -337,13 +314,13 @@ public class NewGUI
 		return awtColor;
 	}
 	
-	
-	public static void main(String[] args)
-	{
-	       NewGUI gui = new NewGUI();
-	       gui.createGUI();
-	       
-	}
+	//For testing
+//	public static void main(String[] args)
+//	{
+//	       NewGUI gui = new NewGUI();
+//	       gui.createGUI();
+//	       
+//	}
 }
 	
 
