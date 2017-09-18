@@ -75,7 +75,7 @@ public class DbQuery extends JFrame {
 		
 		databaseTextField = new JTextField();
 		panel.add(databaseTextField);
-		databaseTextField.setColumns(11);
+		databaseTextField.setColumns(10);
 		
 		//btnSearch = new JButton("Search");
 		//panel.add(btnSearch);

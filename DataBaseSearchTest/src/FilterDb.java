@@ -40,7 +40,7 @@ public static List<Experience> getAllExperiences() throws Exception {
 
 		// Step 2: Allocate a "Statement" object in the Connection
 		stmt = conn.createStatement();
-		myResults = stmt.executeQuery("select * from T1");
+		myResults = stmt.executeQuery("select * from t1");
 		
 		while (myResults.next()) {
 			Experience tempExperience = convertRowToExperience(myResults);
@@ -75,7 +75,7 @@ public static List<Experience> searchExperiences() throws Exception {
 				"jdbc:mysql://localhost:" + PORT_NUMBER + "/Experiences?user=root&password=root"); // MySQL
 
 		//lastName += "%";
-		myStmt = conn.prepareStatement("select * from T1");
+		myStmt = conn.prepareStatement("select * from t1");
 		
 		myResults = myStmt.executeQuery();
 		
@@ -92,7 +92,7 @@ public static List<Experience> searchExperiences() throws Exception {
 	}
 }
 /**
- * Converts experiences so that they are read as a row that will can contain the differnt attributes of experiences 
+ * Converts experiences so that they are read as a row that will can contain the different attributes of experiences 
  *
  */
 public static Experience convertRowToExperience(ResultSet myResults) throws SQLException {
@@ -100,26 +100,16 @@ public static Experience convertRowToExperience(ResultSet myResults) throws SQLE
 	
 	String classStanding = myResults.getString("question1");
 	String isInternational = myResults.getString("question2");
-	String isInternship = myResults.getString("question1");
-	String getOrganization = myResults.getString("question1");
-	String getState = myResults.getString("question1");
-	String getCity = myResults.getString("question1");
-	String getNatureOfWork = myResults.getString("question1");
-	String getHoursPerWeek = myResults.getString("question1");
-	String getCompensation = myResults.getString("question1");
-	
+	String isInternship = myResults.getString("question3");
+	String Organization = myResults.getString("question4");
+	String state = myResults.getString("question5");
+	String city = myResults.getString("question6");
+	String natureOfWork = myResults.getString("question7");
+	String hoursPerWeek = myResults.getString("question8");
+	String compensation = myResults.getString("question9");
 
-
-	Experience tempExperience = new Experience(classStanding, isInternational, isInternship, getOrganization, getState, getCity, getNatureOfWork, getHoursPerWeek); 	
+	Experience tempExperience = new Experience(classStanding, isInternational, isInternship, Organization, state, city, natureOfWork, compensation, hoursPerWeek); 	
 	return tempExperience;
-	
-	
-
-
-
-
-
-
 
 }
 

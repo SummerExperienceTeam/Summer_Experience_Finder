@@ -1,10 +1,12 @@
+
 import java.util.List;
+
 import javax.swing.table.AbstractTableModel;
 
 /**
  * The following class was adapted from luv2code.com to fit into our summer
  * experience project. 
- * @author jacobnehama and Pietro
+ * @author jacobnehama
  *
  */
 
@@ -19,9 +21,10 @@ class ExperienceTableModel extends AbstractTableModel {
 	private static final int NATURE_OF_WORK = 6;
 	private static final int HOURS_PER_WEEK = 7;
 	private static final int COMPENSATION = 8;
-	
 
-	private String[] columnNames = { "international",  "internship",  "organization",  "state",  "city", "natureOfWork", "hoursPerWeek",  "standing","compensation" };
+	private String[] columnNames = { "Class Standing",  "International",  "Internship",  "state",  "city",
+			 "natureOfWork",  "addtionalInformation",  "hoursPerWeek",  "standing",
+			 "compensation",  "activity" };
 	private List<Experience> experiences;
 
 	public ExperienceTableModel(List<Experience> theExperiences) {
@@ -50,11 +53,11 @@ class ExperienceTableModel extends AbstractTableModel {
 
 		switch (col) {
 		case CLASS_STANDING:
-			return tempExperiences.getClassStanding();
+			return tempExperiences.getStanding();
 		case INTERNATIONAL:
-			return tempExperiences.getIsInternational();
+			return tempExperiences.isInternational();
 		case INTERNSHIP:
-			return tempExperiences.getIsInternship();
+			return tempExperiences.isInternship();
 		case ORG:
 			return tempExperiences.getOrganization();
 		case STATE:
@@ -68,7 +71,7 @@ class ExperienceTableModel extends AbstractTableModel {
 		case COMPENSATION:
 			return tempExperiences.getCompensation();
 		default:
-			return tempExperiences.getClassStanding();
+			return tempExperiences.getStanding();
 		}
 	}
 
