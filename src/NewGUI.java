@@ -21,6 +21,7 @@ import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
+import java.util.ArrayList;
 
 import javax.swing.JTextField;
 import javax.swing.JButton;
@@ -40,19 +41,21 @@ public class NewGUI
     final static boolean RIGHT_TO_LEFT = false;
 	
     //Components as global variables. 
-    private JPanel contentPane;
+    private JPanel mainPane;
 	private JScrollPane scrollPane;  
 	private JTable table;
 	private JLabel experiencesLabel;
 	private JLabel searchCriteriaLabel;
-	private JFrame mainPane; 
+	private JFrame masterFrame; 
 	private JLabel searchCriteria;
 	private JTextArea outputText;
+	private String INTERNATIONAL_STRING = "International Student:Yes";
+	private String INTERNSHIP_STRING = "Internship:Yes";
 	
 	
 	Experience testExperience = new Experience(true,true,"Greenpeace","California", "Monteray", 
-			"Saving the whales", "It was fun", 30, Experience.StudentStanding.SENIOR, Experience.CompensationType.UNPAID,
-			Experience.MainActivity.VOLUNTEERING);
+			"Saving the whales", "It was fun", "30", "Senior","Unpaid",
+			"Volunteering");
 	
 	public NewGUI()
 	{
@@ -62,19 +65,53 @@ public class NewGUI
 	public String getSearchCriteria(JComboBox state, JComboBox standing, JComboBox compensationList,JComboBox mainActivityList, JCheckBox internationalBox, JCheckBox internshipBox)
 	{
 		//NEED TO ATT STUFF FOR INTERNATIONAL AND INTERNSHIP BUTTONS.
-		String criteriaToReturn = (String) state.getSelectedItem() +" " + (String) standing.getSelectedItem()  +" " + (String) compensationList.getSelectedItem() +" " + (String) mainActivityList.getSelectedItem();
+		String intl = "";
+		String intern = "";
+		if(internationalBox.isSelected())
+		{
+			intl = INTERNATIONAL_STRING + ", ";
+		}
+		if(internationalBox.isSelected())
+		{
+			intern = INTERNSHIP_STRING;
+		}
+		String criteriaToReturn = (String) state.getSelectedItem() +" " + (String) standing.getSelectedItem()  +" " 
+		+ (String) compensationList.getSelectedItem() +" " + (String) mainActivityList.getSelectedItem() + " " + intl + intern;
 		
 		return criteriaToReturn;
 	}
 	
+	public ArrayList<String> getCrieteriaList(JComboBox state, JComboBox standing, JComboBox compensationList,JComboBox mainActivityList, JCheckBox internationalBox, JCheckBox internshipBox)
+	{
+		ArrayList<String> criteria = new ArrayList<String>();
+		if(internationalBox.isSelected())
+		{
+			criteria.add(INTERNATIONAL_STRING);
+		}
+		if(internationalBox.isSelected())
+		{
+			criteria.add(INTERNSHIP_STRING);
+		}
+		
+		criteria.add((String) state.getSelectedItem());
+		criteria.add((String) standing.getSelectedItem());
+		criteria.add((String) compensationList.getSelectedItem());
+		criteria.add((String) mainActivityList.getSelectedItem());
+		
+		return criteria;
+	}
 	public void createGUI() 
 	{
 		
-		mainPane = new JFrame("Database Search");
-		mainPane.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		mainPane.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
-		mainPane.setBounds(600, 600, 1200, 1200);
+		masterFrame = new JFrame("Database Search");
+		masterFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		masterFrame.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
+		masterFrame.setBounds(600, 600, 1200, 1200);
+	
+		mainPane = new JPanel();
+		mainPane.setBorder(new EmptyBorder(50, 50, 50, 50));
 		mainPane.setLayout(new GridBagLayout());
+		masterFrame.setContentPane(mainPane);
 		
 		//From the GridBagLayoutDemo
 		GridBagConstraints c = new GridBagConstraints();
@@ -126,7 +163,7 @@ public class NewGUI
 		c.gridy = 0;
 		mainPane.add(internationalBox, c);
 		
-
+		
 		JCheckBox internshipBox = new JCheckBox("Internship");
 		internshipBox.setMnemonic(KeyEvent.VK_C); 
 		internshipBox.setSelected(false);
@@ -148,7 +185,32 @@ public class NewGUI
 		JPanel blankPanel = new JPanel();
 		blankPanel.setLayout(new FlowLayout());
 		blankPanel.setBorder(new EmptyBorder(50, 50, 50, 50));
-		blankPanel.setLayout(new BorderLayout(0, 1));
+		//blankPanel.setLayout(new BorderLayout(0, 1));
+		blankPanel.setVisible(true);
+		c.fill = GridBagConstraints.HORIZONTAL;
+		c.ipady = 100;    
+		c.ipadx = 100;
+		c.weightx = 0.0;
+		c.gridwidth = 10;
+		c.gridheight = 10;
+		c.gridx = 0;
+		c.gridy = 2;
+		mainPane.add(blankPanel, c);
+		JPanel blank1Panel = new JPanel();
+		blank1Panel.setLayout(new FlowLayout());
+		blank1Panel.setBorder(new EmptyBorder(50, 50, 50, 50));
+		//blankPanel.setLayout(new BorderLayout(0, 1));
+		blank1Panel.setVisible(true);
+		c.fill = GridBagConstraints.HORIZONTAL;
+		c.ipady = 100;    
+		c.ipadx = 100;
+		c.weightx = 0.0;
+		c.gridwidth = 10;
+		c.gridheight = 10;
+		c.gridx = 0;
+		c.gridy = 3;
+		mainPane.add(blank1Panel, c);
+	
 		
 		
 		
@@ -162,10 +224,11 @@ public class NewGUI
 			public void actionPerformed(ActionEvent e) 
 			{
 				String search = getSearchCriteria(stateList, studentStandingList, compensationList, mainActivityList, internationalBox, internshipBox);
-				outputText = new JTextArea(search);
+				outputText = new JTextArea("TOP \n"+search+"\n BOTTOM \n");
 				scrollPane = new JScrollPane(outputText);
 				scrollPane.setBorder(new EmptyBorder(50, 50, 100, 100));
 				scrollPane.setBackground(Color.DARK_GRAY);
+				//scrollPane.setBounds(500, 500, 1100, 1100);
 				//scrollPane.setLayout(new ScrollPaneLayout());
 				scrollPane.setVisible(true);
 				c.fill = GridBagConstraints.HORIZONTAL;
@@ -175,17 +238,17 @@ public class NewGUI
 				c.gridwidth = 10;
 				c.gridheight = 10;
 				c.gridx = 0;
-				c.gridy = 1;
+				c.gridy = 0;
 				mainPane.add(scrollPane, c);
-				
-				scrollPane.repaint();
-				
+				mainPane.revalidate();
 				mainPane.setVisible(true);
+
+				
 			}	
 		} );
 				
-		mainPane.pack();
-		mainPane.setVisible(true);		
+		mainPane.setVisible(true);	
+		masterFrame.setVisible(true);
 	}
 	
 	public static void main(String[] args)

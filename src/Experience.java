@@ -27,14 +27,14 @@ public class Experience
 	private String city;
 	private String natureOfWork;
 	private String addtionalInformation;
-	private int hoursPerWeek;
-	private StudentStanding standing;
-	private CompensationType compensation;
-	private MainActivity activity;
+	private String hoursPerWeek;
+	private String standing;
+	private String compensation;
+	private String activity;
 	
 	public Experience(boolean international, boolean internship, String organization, String state, String city,
-			String natureOfWork, String addtionalInformation, int hoursPerWeek, StudentStanding standing,
-			CompensationType compensation, MainActivity activity) {
+			String natureOfWork, String addtionalInformation, String hoursPerWeek, String standing,
+			String compensation, String activity) {
 		super();
 		this.international = international;
 		this.internship = internship;
@@ -51,64 +51,60 @@ public class Experience
 
 	public String getStandingString()
 	{
-		return this.standing.name();
+		return standing;
 	}
 	
 	public String getCompensationString()
 	{
-		return this.compensation.name();
+		return compensation;
 	}
 	
 	public String getActivityString()
 	{
-		return this.activity.name();
-	}
-	
-	public boolean isInternational() {
-		return international;
-	}
-
-	public boolean isInternship() {
-		return internship;
-	}
-
-	public String getOrganization() {
-		return organization;
-	}
-
-	public String getState() {
-		return state;
-	}
-	
-	public String getCity() {
-		return city;
-	}
-
-	public String getNatureOfWork() {
-		return natureOfWork;
-	}
-
-	public String getAddtionalInformation() {
-		return addtionalInformation;
-	}
-
-	public int getHoursPerWeek() {
-		return hoursPerWeek;
-	}
-
-	public StudentStanding getStanding() {
-		return standing;
-	}
-
-	public CompensationType getCompensation() {
-		return compensation;
-	}
-
-	public MainActivity getActivity() {
 		return activity;
 	}
 	
-	public String toString()
+	public boolean isInternational() 
+	{
+		return international;
+	}
+
+	public boolean isInternship() 
+	{
+		return internship;
+	}
+
+	public String getOrganization()
+	{
+		return organization;
+	}
+
+	public String getState()
+	{
+		return state;
+	}
+	
+	public String getCity()
+	{
+		return city;
+	}
+
+	public String getNatureOfWork() 
+	{
+		return natureOfWork;
+	}
+
+	public String getAddtionalInformation() 
+	{
+		return addtionalInformation;
+	}
+
+	public String getHoursPerWeek()
+	{
+		return hoursPerWeek;
+	}
+
+		public String toString()
 	{
 		String intl = "";
 		String intern = "";
