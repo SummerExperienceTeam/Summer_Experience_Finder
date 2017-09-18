@@ -112,6 +112,11 @@ public static Experience convertRowToExperience(ResultSet myResults) throws SQLE
 	
 	Experience tempExperience = new Experience(decision, participate, org, state, city, natureOfWork, additionalInformation, hoursPerWeek, classStanding, compensation, activity);	
 	return tempExperience;
+	
+	String classStanding = myResults.getString("question1");
+	String isInternational = myResults.getString("question2");
+	
+
 }
 
 }
