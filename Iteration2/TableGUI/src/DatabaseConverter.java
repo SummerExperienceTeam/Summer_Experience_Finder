@@ -11,13 +11,17 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 
-
-public class FilterDb {
+/**
+ * Converts experience from row in database to type Experience in List
+ * @author jacobnehama
+ *
+ */
+public class DatabaseConverter {
 
 public static final String PORT_NUMBER = "8889";
 
 /**
- * Gets all of the experiences from the database so we can display them in our gui
+ * Gets all of the experiences from the database so we can display them in our GUI
  *
  */
 public static List<Experience> getAllExperiences() throws Exception {
@@ -92,12 +96,14 @@ public static List<Experience> searchExperiences() throws Exception {
 	}
 }
 /**
- * Converts experiences so that they are read as a row that will can contain the differnt attributes of experiences 
+ * Converts experiences so that they are read as a row that will can contain the different attributes of experiences 
  *
  */
 public static Experience convertRowToExperience(ResultSet myResults) throws SQLException {
 	
 	
+	String classStanding = myResults.getString("Question1"); 
+	String compensation = myResults.getString("Question2"); // 22 , 11 , 12 , 21 
 	String participate = myResults.getString("Question4"); // leave questoin 4 = org 
 	String decision = myResults.getString("Question3"); //leave = did u intership  
 	String org = myResults.getString("Question5"); //leave = state internship
@@ -105,10 +111,9 @@ public static Experience convertRowToExperience(ResultSet myResults) throws SQLE
 	String city = myResults.getString("Question7"); // leave = nature of work
 	String natureOfWork = myResults.getString("Question8"); // leave = hrs per week
 	String hoursPerWeek = myResults.getString("Question9"); // leave  = compensation
-	String classStanding = myResults.getString("Question1"); 
-	String compensation = myResults.getString("Question2"); // 22 , 11 , 12 , 21 
 	
-	Experience tempExperience = new Experience(decision, participate, org, state, city, natureOfWork, hoursPerWeek, classStanding, compensation );	
+	
+	Experience tempExperience = new Experience(decision, participate, org, state, city, natureOfWork, hoursPerWeek, compensation, classStanding );	
 	return tempExperience;
 }
 

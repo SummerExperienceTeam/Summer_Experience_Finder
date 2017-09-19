@@ -37,7 +37,7 @@ public class DbQuery extends JFrame {
 	private JTable table;
 	private JComboBox filterList;
 	List<Experience> experiences = null;
-	FilterDb dbFilter = new FilterDb();
+	DatabaseConverter dbFilter = new DatabaseConverter();
 	
 
 	public static void main(String[] args) {
@@ -109,9 +109,9 @@ public class DbQuery extends JFrame {
 					experiences = null;
 
 					if (searchQuery != null && searchQuery.trim().length() > 0) {
-						experiences = FilterDb.searchExperiences();
+						experiences = DatabaseConverter.searchExperiences();
 					} else {
-						experiences = FilterDb.getAllExperiences();
+						experiences = DatabaseConverter.getAllExperiences();
 					}
 					
 					 
@@ -120,10 +120,10 @@ public class DbQuery extends JFrame {
 					//set it to whatever you want
 					table.setModel(model);
 					
-					experiences = FilterDb.getAllExperiences();
-					for (Experience temp : experiences) {
-						System.out.println(temp);
-					}
+//					experiences = DatabaseConverter.getAllExperiences();
+//					for (Experience temp : experiences) {
+//						System.out.println(temp);
+					//}
 					
 				} catch (Exception exc) {
 					JOptionPane.showMessageDialog(DbQuery.this, "Error: " + exc, "Error", JOptionPane.ERROR_MESSAGE); 

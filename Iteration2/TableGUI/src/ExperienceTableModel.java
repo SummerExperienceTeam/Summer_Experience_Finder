@@ -70,7 +70,7 @@ class ExperienceTableModel extends AbstractTableModel {
 		case COMPENSATION:
 			return tempExperiences.getCompensation();
 		default:
-			return tempExperiences.getStanding();
+			return tempExperiences.getCompensation();
 		}
 	}
 
