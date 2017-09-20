@@ -65,6 +65,7 @@ public class SummerExperienceGUI
 	public JCheckBox internshipBox ;
 	public JButton searchButton;
 	public JButton restorePreviousSearchButton;
+	public JButton resetButton;
 	
 	//Stack for commands
 	private Stack<guiCommand> commands = new Stack<guiCommand>();
@@ -108,6 +109,12 @@ public class SummerExperienceGUI
 	 */
 	
 	
+	public void refreshGui()
+	{
+		mainPane.revalidate();
+		mainPane.setVisible(true);
+		masterFrame.validate();
+	}
 	public String experienceObjectListToString(ArrayList<Experience> experiences)
 	{
 		String experiencesString = "";
@@ -265,8 +272,8 @@ public class SummerExperienceGUI
 		searchButton = new JButton("Search");
 		c.weightx = 0.5;
 		c.fill = GridBagConstraints.HORIZONTAL;
-		c.gridx = 4;
-		c.gridy = 0;
+		c.gridx = 3;
+		c.gridy = 1;
 		mainPane.add(searchButton, c);
 		
 		restorePreviousSearchButton = new JButton("Restore Previous Search");
@@ -275,6 +282,13 @@ public class SummerExperienceGUI
 		c.gridx = 4;
 		c.gridy = 1;
 		mainPane.add(restorePreviousSearchButton, c);
+		
+		resetButton = new JButton("Reset Criteria");
+		c.weightx = 0.5;
+		c.fill = GridBagConstraints.HORIZONTAL;
+		c.gridx = 4;
+		c.gridy = 0;
+		mainPane.add(resetButton, c);
 		
 		//__________________________________________________________________________________________________________
 
@@ -316,56 +330,68 @@ public class SummerExperienceGUI
 					SearchCommand previousSearch = (SearchCommand) commands.pop();
 					String search = previousSearch.getSearchCriteria();
 					outputText.setText(search);
-					mainPane.revalidate();
-					mainPane.setVisible(true);
-					masterFrame.validate();
+					previousSearch.undoCommand();
+					refreshGui();
 					
 				}
 				else
 				{
+					//Not printing temporary error string into text area for whatever reason. Can't figure it out. 
+					
 					System.out.println("HERE");
+			
 					String current = outputText.getText();
 					outputText.setText("No last search to restore.");
-					mainPane.revalidate();
-					mainPane.setVisible(true);
-					masterFrame.revalidate();	
+					refreshGui();
+					
 					try
 					{
-						TimeUnit.MILLISECONDS.sleep(500);
+						refreshGui();
+						Thread.sleep(2000);
 					}
 					catch(Exception ex)
 					{
 						System.out.print("Error in pause: " + ex +"\n" + "Moving on.");
 					}
 					outputText.setText(current);
-					mainPane.revalidate();
-					mainPane.setVisible(true);
-					masterFrame.validate();	
+					refreshGui();
 				}
 				
 			}
 		} );
 	
+		resetButton.addActionListener(new ActionListener() 
+		{
+			@Override
+			public void actionPerformed(ActionEvent e) 
+			{
+				stateList.setSelectedIndex(0);
+				studentStandingList.setSelectedIndex(0);
+				compensationList.setSelectedIndex(0);
+				industryList.setSelectedIndex(0);
+				hoursList.setSelectedIndex(0);
+				internationalBox.setSelected(false);
+				internshipBox.setSelected(false);
+				refreshGui();
+				
+			}
+		} );
 		
 		searchButton.addActionListener(new ActionListener() 
 		{
 			@Override
 			public void actionPerformed(ActionEvent e) 
 			{
-				//Action Listener that updates the text.
 				SearchCommand searchCommand = new SearchCommand(stateList, studentStandingList, compensationList, industryList, hoursList, internationalBox, internshipBox);
 				commands.push(searchCommand);
 				String search = searchCommand.getSearchCriteria();
-				//String search = getSearchCriteria(stateList, studentStandingList, compensationList, industryList, hoursList, internationalBox, internshipBox);
-				//String filtered = experienceObjectListToString(filterDB(experiences, getCrieteriaList(stateList, studentStandingList, compensationList, industryList, hoursList, internationalBox, internshipBox)));
 				outputText.setText(search);
-				mainPane.revalidate();
-				mainPane.setVisible(true);
-				masterFrame.validate();
+				refreshGui();
 				
 			}
 		} );
 		
+		refreshGui();
 		masterFrame.setVisible(true);
 	}
 	

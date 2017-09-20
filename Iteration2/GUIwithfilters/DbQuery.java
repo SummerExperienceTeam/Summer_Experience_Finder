@@ -39,7 +39,9 @@ public class DbQuery extends JFrame {
 	private JComboBox filterList;
 	private JLabel experienceLabel;
 	private JTextArea output;
-	private SummerExperienceGUI gui;
+	
+	//Public for implementation of reset criteria and restore previous search buttons.
+	public static SummerExperienceGUI gui;
 
 	
 	ArrayList<Experience> experiences = null;
@@ -49,7 +51,7 @@ public class DbQuery extends JFrame {
 	public static void main(String[] args) {
 		
 	       
-	        DbQuery ourGUI = new DbQuery();  
+	        DbQuery runQuery = new DbQuery();  
 	    }
 
 

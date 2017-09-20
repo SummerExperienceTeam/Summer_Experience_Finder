@@ -19,6 +19,8 @@ public class SearchCommand implements guiCommand
 	private String hours;
 	private String international;
 	private String internship;
+	private boolean isInternational;
+	private boolean isInternship;
 	//search command could have methods that return arrayLists, strings. 
 	//Assign stuff in constructor? yes
 	
@@ -31,6 +33,9 @@ public class SearchCommand implements guiCommand
 		this.hours = (String) hours.getSelectedItem();
 		this.international = getInternationalStatus(internationalBox);
 		this.internship = getInternshipStatus(internshipBox);
+		this.isInternational = internationalBox.isSelected();
+		this.isInternship = internshipBox.isSelected();
+		
 		
 	}
 	
@@ -43,8 +48,15 @@ public class SearchCommand implements guiCommand
 	//undo will restore the previous search and activate the filters. 
 	public void undoCommand()
 	{
-		//setSelectedIndex()
-		//This undo command will need to effect the public criteria selection components of the gui and set them back to what they were. 
+		DbQuery.gui.stateList.setSelectedItem(state);
+		DbQuery.gui.studentStandingList.setSelectedItem(standing);
+		DbQuery.gui.compensationList.setSelectedItem(compensation);
+		DbQuery.gui.industryList.setSelectedItem(industry);
+		DbQuery.gui.hoursList.setSelectedItem(hours);
+		DbQuery.gui.internationalBox.setSelected(isInternational);
+		DbQuery.gui.internshipBox.setSelected(isInternship);
+		
+		DbQuery.gui.refreshGui();
 		
 	}
 	
