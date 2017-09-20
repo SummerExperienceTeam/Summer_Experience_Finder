@@ -55,7 +55,7 @@ public class DbQuery extends JFrame {
 		
 		setTitle("Database Search");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(400, 400, 900, 600);
+		setBounds(1000, 1000, 1000, 1000);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(50, 50, 50, 50));
 		contentPane.setLayout(new BorderLayout(0, 0));
