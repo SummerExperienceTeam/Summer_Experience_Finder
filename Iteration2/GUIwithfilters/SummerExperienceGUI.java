@@ -23,6 +23,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
+import java.util.Stack;
+import java.util.concurrent.TimeUnit;
 
 import javax.swing.JTextField;
 import javax.swing.BorderFactory;
@@ -40,7 +42,7 @@ import javax.swing.ScrollPaneLayout;
  * @author Nick
  *
  */
-public class NewGUI
+public class SummerExperienceGUI
 {
 	final static boolean shouldFill = true;
     final static boolean shouldWeightX = true;
@@ -53,33 +55,42 @@ public class NewGUI
 	private JTextArea outputText;
 	
 	
-	//Selection Tools
-	private JComboBox stateList ;
-	private JComboBox studentStandingList;
-	private JComboBox compensationList;
-	private JComboBox industryList;
-	private JComboBox hoursList;
-	private JCheckBox internationalBox; 
-	private JCheckBox internshipBox ;
-	private JButton searchButton;
+	//Selection Tools: public so that command objects can get and update status. 
+	public JComboBox stateList ;
+	public JComboBox studentStandingList;
+	public JComboBox compensationList;
+	public JComboBox industryList;
+	public JComboBox hoursList;
+	public JCheckBox internationalBox; 
+	public JCheckBox internshipBox ;
+	public JButton searchButton;
+	public JButton restorePreviousSearchButton;
+	
+	//Stack for commands
+	private Stack<guiCommand> commands = new Stack<guiCommand>();
 	
 	
+	//public for use in command objects.
+	public static String INTERNATIONAL_STRING = "Yes";
+	public static String INTERNSHIP_STRING = "Yes";
 	
-	private String INTERNATIONAL_STRING = "Yes";
-	private String INTERNSHIP_STRING = "Yes";
 	//ColorScheme below
-//	private Color colorOne = convertFXColorToSwingColor(javafx.scene.paint.Color.BLACK); //Dark
-//	private Color Color.WHITE = convertFXColorToSwingColor(javafx.scene.paint.Color.GOLDENROD); //Light
-//	private Color Color.WHITE = convertFXColorToSwingColor(javafx.scene.paint.Color.BEIGE);
-//	private Color Color.WHITE = convertFXColorToSwingColor(javafx.scene.paint.Color.GOLD);
+	private Color colorOne = convertFXColorToSwingColor(javafx.scene.paint.Color.BLACK); //Dark
+	private Color colorTwo = convertFXColorToSwingColor(javafx.scene.paint.Color.GOLDENROD); //Light
+	private Color colorThree = convertFXColorToSwingColor(javafx.scene.paint.Color.DARKGOLDENROD);
+	private Color colorFour = convertFXColorToSwingColor(javafx.scene.paint.Color.GOLD);
+	private Color fontColor = Color.WHITE;
+	
+	
 	//Instance of utility class
+	
 	private GuiFileIO guiIO = new GuiFileIO();
 	
 	//List of experiences that the GUI uses
 	ArrayList<Experience> experiences = new ArrayList<Experience>();
 	
 	
-	public NewGUI(ArrayList<Experience> experiences)
+	public SummerExperienceGUI(ArrayList<Experience> experiences)
 	{
 		this.experiences = experiences;
 	}
@@ -95,24 +106,7 @@ public class NewGUI
 	 * @param internshipBox
 	 * @return
 	 */
-	public String getSearchCriteria(JComboBox state, JComboBox standing, JComboBox compensationList,JComboBox industryList, JComboBox hoursList,  JCheckBox internationalBox, JCheckBox internshipBox)
-	{
-		//NEED TO ATT STUFF FOR INTERNATIONAL AND INTERNSHIP BUTTONS.
-		String intl = "";
-		String intern = "";
-		if(internationalBox.isSelected())
-		{
-			intl = INTERNATIONAL_STRING + "";
-		}
-		if(internshipBox.isSelected())
-		{
-			intern = INTERNSHIP_STRING;
-		}
-		String criteriaToReturn = (String) state.getSelectedItem() +", " + (String) standing.getSelectedItem()  +", " 
-		+ (String) compensationList.getSelectedItem() +", " + (String) industryList.getSelectedItem() +", "+ (String) hoursList.getSelectedItem()+ intl + intern;
-		
-		return criteriaToReturn;
-	}
+	
 	
 	public String experienceObjectListToString(ArrayList<Experience> experiences)
 	{
@@ -137,29 +131,7 @@ public class NewGUI
 	 * @param internshipBox
 	 * @return
 	 */
-	public ArrayList<String> getCrieteriaList(JComboBox state, JComboBox standing, JComboBox compensationList,JComboBox industryList, JComboBox hoursList, JCheckBox internationalBox, JCheckBox internshipBox)
-	{
-		ArrayList<String> criteria = new ArrayList<String>();
-		criteria.add(null);
-		criteria.add(null);
-		if(internationalBox.isSelected())
-		{
-			criteria.set(0, INTERNATIONAL_STRING);
-		}
-		if(internationalBox.isSelected())
-		{
-			criteria.set(1, INTERNSHIP_STRING);
-		}
-		
-		criteria.add((String) state.getSelectedItem());
-		criteria.add((String) standing.getSelectedItem());
-		criteria.add((String) compensationList.getSelectedItem());
-		criteria.add((String) industryList.getSelectedItem());
-		criteria.add((String) hoursList.getSelectedItem());
-		
-		return criteria;
-	}
-	
+
 	
 	public ArrayList<Experience> filterDB(ArrayList<Experience> allExperiences, ArrayList<String> criteria) {
 		
@@ -198,6 +170,8 @@ public class NewGUI
 		System.out.println(matchingExperiences.isEmpty());
 		return matchingExperiences;
 	}
+	
+	
 	/**
 	 * This method creates and formats the GUI.
 	 */
@@ -210,7 +184,7 @@ public class NewGUI
 		masterFrame.setBounds(0, 0, 1200, 600);
 	
 		mainPane = new JPanel();
-		mainPane.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+		mainPane.setBorder(BorderFactory.createLineBorder(colorThree));
 		mainPane.setLayout(new GridBagLayout());
 		masterFrame.setContentPane(mainPane);
 		
@@ -221,7 +195,8 @@ public class NewGUI
 		c.fill = GridBagConstraints.HORIZONTAL;
 		}
 		c.insets = new Insets(2,2,2,2);
-		mainPane.setBackground(Color.WHITE);
+		//Main background color
+		mainPane.setBackground(colorTwo);
 		
 		
 		//Below are all of the filters, checkBoxes, and Buttons.
@@ -294,19 +269,29 @@ public class NewGUI
 		c.gridy = 0;
 		mainPane.add(searchButton, c);
 		
+		restorePreviousSearchButton = new JButton("Restore Previous Search");
+		c.weightx = 0.5;
+		c.fill = GridBagConstraints.HORIZONTAL;
+		c.gridx = 4;
+		c.gridy = 1;
+		mainPane.add(restorePreviousSearchButton, c);
+		
 		//__________________________________________________________________________________________________________
 
 		//Sets up the Text are where output will go.
 		outputText = new JTextArea("");
 		outputText.setBorder(BorderFactory.createEtchedBorder(EtchedBorder.RAISED));
-		outputText.setBackground(Color.WHITE);
-		outputText.setForeground(Color.BLACK);
+		//color of text box
+		outputText.setBackground(colorOne);
+		//color of writing
+		outputText.setForeground(fontColor);
 		outputText.setBounds(0,0,800,1000);
 		
 		//Setting up the scroll pane 
 		scrollPane = new JScrollPane(outputText);
-		scrollPane.setBorder(BorderFactory.createBevelBorder(3,Color.WHITE, Color.WHITE));
-		scrollPane.setBackground(Color.WHITE);
+		scrollPane.setBorder(BorderFactory.createBevelBorder(3,colorThree, colorFour));
+		//ScrollPane color
+		scrollPane.setBackground(colorTwo);
 		scrollPane.setVisible(true);
 		c.fill = GridBagConstraints.HORIZONTAL;
 		c.ipady = 100;    
@@ -320,15 +305,60 @@ public class NewGUI
 		mainPane.revalidate();
 		mainPane.setVisible(true);
 		masterFrame.validate();
+		
+		restorePreviousSearchButton.addActionListener(new ActionListener() 
+		{
+			@Override
+			public void actionPerformed(ActionEvent e) 
+			{
+				if(!commands.isEmpty())
+				{
+					SearchCommand previousSearch = (SearchCommand) commands.pop();
+					String search = previousSearch.getSearchCriteria();
+					outputText.setText(search);
+					mainPane.revalidate();
+					mainPane.setVisible(true);
+					masterFrame.validate();
+					
+				}
+				else
+				{
+					System.out.println("HERE");
+					String current = outputText.getText();
+					outputText.setText("No last search to restore.");
+					mainPane.revalidate();
+					mainPane.setVisible(true);
+					masterFrame.revalidate();	
+					try
+					{
+						TimeUnit.MILLISECONDS.sleep(500);
+					}
+					catch(Exception ex)
+					{
+						System.out.print("Error in pause: " + ex +"\n" + "Moving on.");
+					}
+					outputText.setText(current);
+					mainPane.revalidate();
+					mainPane.setVisible(true);
+					masterFrame.validate();	
+				}
+				
+			}
+		} );
+	
+		
 		searchButton.addActionListener(new ActionListener() 
 		{
 			@Override
 			public void actionPerformed(ActionEvent e) 
 			{
 				//Action Listener that updates the text.
-				String search = getSearchCriteria(stateList, studentStandingList, compensationList, industryList, hoursList, internationalBox, internshipBox);
+				SearchCommand searchCommand = new SearchCommand(stateList, studentStandingList, compensationList, industryList, hoursList, internationalBox, internshipBox);
+				commands.push(searchCommand);
+				String search = searchCommand.getSearchCriteria();
+				//String search = getSearchCriteria(stateList, studentStandingList, compensationList, industryList, hoursList, internationalBox, internshipBox);
 				//String filtered = experienceObjectListToString(filterDB(experiences, getCrieteriaList(stateList, studentStandingList, compensationList, industryList, hoursList, internationalBox, internshipBox)));
-				outputText.setText(experienceObjectListToString(experiences));
+				outputText.setText(search);
 				mainPane.revalidate();
 				mainPane.setVisible(true);
 				masterFrame.validate();
@@ -345,17 +375,17 @@ public class NewGUI
 	 * @param fxColor
 	 * @return
 	 */
-//	public Color convertFXColorToSwingColor(javafx.scene.paint.Color fxColor)
-//	{
-//		
-//
-//		java.awt.Color awtColor = new java.awt.Color((float) fxColor.getRed(),
-//		                                             (float) fxColor.getGreen(),
-//		                                             (float) fxColor.getBlue(),
-//		                                             (float) fxColor.getOpacity());
-//		return awtColor;
-//	}
-//	
+	public Color convertFXColorToSwingColor(javafx.scene.paint.Color fxColor)
+	{
+		
+
+		java.awt.Color awtColor = new java.awt.Color((float) fxColor.getRed(),
+		                                             (float) fxColor.getGreen(),
+		                                             (float) fxColor.getBlue(),
+		                                             (float) fxColor.getOpacity());
+		return awtColor;
+	}
+	
 	//For testing
 //	public static void main(String[] args)
 //	{

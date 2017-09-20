@@ -39,7 +39,7 @@ public class DbQuery extends JFrame {
 	private JComboBox filterList;
 	private JLabel experienceLabel;
 	private JTextArea output;
-	private NewGUI gui;
+	private SummerExperienceGUI gui;
 
 	
 	ArrayList<Experience> experiences = null;
@@ -78,7 +78,7 @@ public class DbQuery extends JFrame {
 		catch (Exception exc) {
 			System.out.println(exc); 
 		}
-		gui = new NewGUI(experiences);
+		gui = new SummerExperienceGUI(experiences);
 		gui.createGUI();
 	}
 }
