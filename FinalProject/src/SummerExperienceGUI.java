@@ -72,6 +72,7 @@ public class SummerExperienceGUI
 	private JTable fullTable;
 	private JTable currentDisplayedTable;
 	
+	//For color strategy pattern
 	private ColorSchemeStrategy colorScheme; 
 	//Stack for commands
 	private Stack<guiCommand> commands = new Stack<guiCommand>();
@@ -89,30 +90,28 @@ public class SummerExperienceGUI
 	private Color colorFive;
 	private Color fontColor;
 	private int colorInt = 0; // this int tells switchColorScheme which colorScheme to switch to next. 
-	
-	
-	//Instance of utility class
-	
+	//Instance of utility classes
 	private GuiFileIO guiIO = new GuiFileIO();
 	private TableBuilder tableBuilder = new TableBuilder();
-	
 	//List of experiences that the GUI uses
 	private ArrayList<Experience> experiences = new ArrayList<Experience>();
 	
 	
-	
-	
+	/**
+	 * Constructor for GUI
+	 * Initialized Color Strategy as cc colors
+	 * @param experiences
+	 */
 	public SummerExperienceGUI(ArrayList<Experience> experiences)
 	{
 		//Default color scheme is set
 		this.colorScheme = new ColorSchemeColoradoCollege();
-		colorOne = colorScheme.getColorOne(); //Dark
-		colorTwo = colorScheme.getColorTwo(); //Light
+		colorOne = colorScheme.getColorOne();
+		colorTwo = colorScheme.getColorTwo(); 
 		colorThree = colorScheme.getColorThree();
 		colorFour = colorScheme.getColorFour();
 		colorFive = colorScheme.getColorFive();
-		fontColor = colorScheme.getFontColor();
-		// this needs to go away at some point. 
+		fontColor = colorScheme.getFontColor(); 
 		this.experiences = experiences;
 	}
 	
@@ -161,7 +160,9 @@ public class SummerExperienceGUI
 		refreshGui();
 	}
 	
-	
+	/** Updates the color properties of swing components to the current color strategy.
+	 * 
+	 */
 	public void updateColors()
 	{
 		mainPane.setBorder(BorderFactory.createLineBorder(colorThree));
@@ -174,7 +175,9 @@ public class SummerExperienceGUI
 		fullTable.setForeground(fontColor);
 	}
 	
-	
+	/**
+	 * refreshes the Gui to show any changes
+	 */
 	public void refreshGui()
 	{
 		mainPane.revalidate();
@@ -183,7 +186,12 @@ public class SummerExperienceGUI
 		
 	}
 	
-	
+	/**
+	 * returns a string of the attributes of the experience object. 
+	 * @param experiences
+	 * Not needed for Iteration 3, but possibly useful for (theoretical) future iterations.
+	 * @return formatted string
+	 */
 	public String experienceObjectListToString(ArrayList<Experience> experiences)
 	{
 		String experiencesString = "";
@@ -197,62 +205,15 @@ public class SummerExperienceGUI
 	}
 	
 	/**
-	 * This method gets the selected options of the GUI and returns them as an ArrayList of Strings.
-	 * @param state
-	 * @param standing
-	 * @param compensationQuery
-	 * @param industryQuery
-	 * @param hoursQuery
-	 * @param internationalBox
-	 * @param internshipBox
-	 * @return
+	 * updates the Table displayed in the GUI to the param JTable updatedTable
+	 * @param updatedTable
 	 */
-
-	
 	public void updateTable(JTable updatedTable) 
 	{
 		currentDisplayedTable = updatedTable;
 		scrollPane.setViewportView(currentDisplayedTable);
 		refreshGui();	
 	}
-	
-	public ArrayList<Experience> filterDB(ArrayList<Experience> allExperiences, ArrayList<String> criteria) {
-		
-		ArrayList<Experience> matchingExperiences = new ArrayList<Experience>();
-		matchingExperiences.addAll(allExperiences);
-		ArrayList<Experience> valuesToRemove = new ArrayList<Experience>();
-		String state = criteria.get(2);
-		String industry = criteria.get(5);
-		String year= criteria.get(3);
-		String hours = criteria.get(6);
-		String paid = criteria.get(4);
-		String visa = criteria.get(0);
-		
-		for(Experience e : matchingExperiences) {
-			if( state != null && !state.equals(e.getState())) {
-				valuesToRemove.add(e);
-			} 
-			if( industry != null && !industry.equals(e.getIndustry())) {
-				valuesToRemove.add(e);
-			} 
-			if( year != null && !year.equals(e.getYear())) {
-				valuesToRemove.add(e);
-			} 
-			if( hours != null && !hours.equals(e.getHoursPerWeek())) {
-				valuesToRemove.add(e);
-			} 
-			if( paid != null && !paid.equals(e.getCompensation())) {
-				valuesToRemove.add(e);
-			} 
-			if( visa != null && !visa.equals(e.getInternational())) {
-				valuesToRemove.add(e);
-			} 
-		}
-		matchingExperiences.removeAll(valuesToRemove);
-		System.out.println(matchingExperiences.isEmpty());
-		return matchingExperiences;
-	}
-	
 	
 	/**
 	 * This method creates and formats the GUI.
@@ -264,13 +225,11 @@ public class SummerExperienceGUI
 		masterFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		masterFrame.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
 		masterFrame.setBounds(0, 0, 1200, 900);
-	
+		//Sets the inital size of the window.
 		mainPane = new JPanel();
 		mainPane.setBorder(BorderFactory.createLineBorder(colorThree));
 		mainPane.setLayout(new GridBagLayout());
 		masterFrame.setContentPane(mainPane);
-		
-		//From the GridBagLayoutDemo
 		GridBagConstraints c = new GridBagConstraints();
 		if (shouldFill) 
 		{
@@ -279,7 +238,6 @@ public class SummerExperienceGUI
 		c.insets = new Insets(2,2,2,2);
 		//Main background color
 		mainPane.setBackground(colorTwo);
-		
 		
 		//Below are all of the filters, checkBoxes, and Buttons.
 		//__________________________________________________________________________________________________________
@@ -291,7 +249,7 @@ public class SummerExperienceGUI
 		c.gridy = 0;
 		mainPane.add(stateQuery, c);
 		
-		String[] studentStandingFilter = { "Select Year" ,"Freshman", "Sophomore", "Junior"};
+		String[] studentStandingFilter = { "Select Year" ,"Rising Sophomore", "Rising Junior", "Rising Senior"};
 		studentStandingQuery = new JComboBox(studentStandingFilter);
 		c.weightx = 0.5;
 		c.fill = GridBagConstraints.HORIZONTAL;
@@ -409,6 +367,7 @@ public class SummerExperienceGUI
 		fullTable.setForeground(fontColor);
 		scrollPane.setViewportView(fullTable);
 		
+		//Action listener for restorePreviousSearchButton
 		restorePreviousSearchButton.addActionListener(new ActionListener() 
 		{
 			@Override
@@ -424,7 +383,7 @@ public class SummerExperienceGUI
 				}
 				else
 				{
-					//Not printing temporary error string into text area for whatever reason. Can't figure it out. 
+					//Not printing temporary error string into text area for whatever reason. Never figured it out. 
 					String current = outputText.getText();
 					outputText.setText("No last search to restore.");
 					scrollPane.setViewportView(outputText);
@@ -445,6 +404,7 @@ public class SummerExperienceGUI
 			}
 		} );
 	
+		//Action listener for resetButton
 		resetButton.addActionListener(new ActionListener() 
 		{
 			@Override
@@ -463,6 +423,7 @@ public class SummerExperienceGUI
 			}
 		} );
 		
+		//Action listener for searchButton
 		searchButton.addActionListener(new ActionListener() 
 		{
 			@Override
@@ -472,13 +433,11 @@ public class SummerExperienceGUI
 				SearchCommand searchCommand = new SearchCommand(stateQuery, studentStandingQuery, compensationQuery, industryQuery, hoursQuery, internationalBox, internshipBox,experiences);
 				commands.push(searchCommand);
 				searchCommand.doCommand();
-				
-				//				String search = searchCommand.getSearchCriteria();
-//				outputText.setText(search);
 				refreshGui();
 			}
 		} );
 		
+		//Action listener for colorSchemeButton
 		colorSchemeButton.addActionListener(new ActionListener() 
 		{
 			@Override
@@ -487,14 +446,13 @@ public class SummerExperienceGUI
 				switchColorScheme();	
 			}
 		} );
-		
 		refreshGui();
-		masterFrame.setVisible(true);
-			
+		masterFrame.setVisible(true);		
 	}
 
 	/**
 	 * converts javafx colors to colors usable by swing.
+	 * Not needed in this class for Iteration 3, but possibly useful for (theoretical) future iterations. 
 	 * @param fxColor
 	 * @return
 	 */

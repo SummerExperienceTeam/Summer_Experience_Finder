@@ -3,7 +3,11 @@ import java.util.List;
 
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
-
+/**
+ * 
+ * @author Jacob and Nick 
+ *Class with methods that return the two types of table: fitlered and full.
+ */
 public class TableBuilder {
 	List<Experience> experiences = null;
 
@@ -12,6 +16,10 @@ public class TableBuilder {
 		//constructor stub
 	}
 	
+	/**
+	 * returns a table with all data in database
+	 * @return
+	 */
 	public JTable getFullTable()
 	{
 		JTable fullTable = new JTable(); 
@@ -32,6 +40,11 @@ public class TableBuilder {
 		
 	}
 	
+	/**
+	 * Returns a table with the experiences in filteredExperienceList.
+	 * @param filteredExperienceList
+	 * @return
+	 */
 	public JTable getFilteredTable(ArrayList<Experience> filteredExperienceList)
 	{
 		JTable filteredTable = new JTable();

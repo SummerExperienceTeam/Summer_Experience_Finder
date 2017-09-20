@@ -27,6 +27,17 @@ public class SearchCommand implements guiCommand
 	//search command could have methods that return arrayLists, strings. 
 	//Assign stuff in constructor? yes
 	
+	/**
+	 * Constructor initialized command properties using the JComboBox objects from the GUI as parameters. 
+	 * @param stateQuery
+	 * @param yearQuery
+	 * @param compensationQuery
+	 * @param industryQuery
+	 * @param hoursQuery
+	 * @param internationalBox
+	 * @param internshipBox
+	 * @param allExperiences
+	 */
 	public SearchCommand(JComboBox stateQuery, JComboBox yearQuery, JComboBox compensationQuery, JComboBox industryQuery, JComboBox hoursQuery, JCheckBox internationalBox, JCheckBox internshipBox, ArrayList<Experience> allExperiences)
 	{ 
 		this.state = (String) stateQuery.getSelectedItem();
@@ -69,6 +80,11 @@ public class SearchCommand implements guiCommand
 		
 	}
 	
+	/**
+	 * gets a string representing the status of the international box.
+	 * @param internationalBox
+	 * @return
+	 */
 	public String getInternationalStatus(JCheckBox internationalBox)
 	{
 		String status;
@@ -84,6 +100,11 @@ public class SearchCommand implements guiCommand
 		
 	}
 	
+	/**
+	 * gets a string representing the status of the internship box.
+	 * @param internshipBox
+	 * @return
+	 */
 	public String getInternshipStatus(JCheckBox internshipBox)
 	{
 		String status;
@@ -98,7 +119,10 @@ public class SearchCommand implements guiCommand
 		return status;
 	}
 	
-	
+	/**
+	 * Creates a criteria object with the SearchCommand's attributes.
+	 * @return
+	 */
 	public Criteria getCriteria()
 
 	{
@@ -107,7 +131,7 @@ public class SearchCommand implements guiCommand
 	}
 	
 	/**
-	 * @returna String with the search criteria.
+	 * @return a String with the search criteria.
 	 */
 	public String getSearchCriteria()
 	{

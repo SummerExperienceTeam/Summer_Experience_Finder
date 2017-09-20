@@ -96,7 +96,7 @@ public class createSingletonDatabase {
 						"jdbc:mysql://localhost:" + PORT_NUMBER + "/experiences?user=root&password=root"); // MySQL
 				// Step 2: Allocate a "Statement" object in the Connection
 				Statement stmt = conn.createStatement();) {
-			// Step 3 - create our database
+			// Step 3 - create our table
 			String sql2 = "CREATE TABLE IF NOT EXISTS t1 ( " + "question1 varchar(500), " + "question2 varchar(500), "
 					+ "question3 varchar(500), " + "question4 varchar(500), " + "question5 varchar(500), "
 					+ "question6 varchar(500), " + "question7 varchar(500), " + "question8 varchar(500), "

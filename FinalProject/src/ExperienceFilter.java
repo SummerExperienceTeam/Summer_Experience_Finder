@@ -1,5 +1,10 @@
 import java.util.ArrayList;
 
+/**
+ * 
+ * @author Oliver
+ * The ExperienceFilter can be used to filter an ArrayList of Experience data, takes in said ArrayList
+ */
 public class ExperienceFilter {
 	private static final String STATE_NOT_SELECTED = "Select State"; 
 	private static final String INDUSTRY_NOT_SELECTED = "Select Industry"; 
@@ -18,10 +23,19 @@ public class ExperienceFilter {
 	
 	ArrayList<Experience> allExperiences;
 	
+	/**
+	 * 
+	 * @param allExperiences, ArrayList of all experiences in database
+	 */
 	public ExperienceFilter(ArrayList<Experience> allExperiences) {
 		this.allExperiences = allExperiences;
 	}
 	
+	/**
+	 * 
+	 * @param criteria, contains users filter criteria
+	 * @return ArrayList of matching Experiences
+	 */
 	public ArrayList<Experience> filterDB(Criteria criteria) {
 		ArrayList<Experience> matchingExperiences = new ArrayList<Experience>();
 		matchingExperiences.addAll(allExperiences);
@@ -33,32 +47,30 @@ public class ExperienceFilter {
 		compensation = criteria.getCompensation();
 		international = criteria.getInternational();
 		internship = criteria.getInternship();
-		int count = 0;
 		for(Experience e : matchingExperiences) {
-			if( !state.equals(STATE_NOT_SELECTED) && !state.equals(e.getState())) {
-				count++;
+			if( !state.equals(STATE_NOT_SELECTED) && !state.equals(e.getState())) {		//state filter
 				experiencesToRemove.add(e);
 			} 
-			else if( !industry.equals(INDUSTRY_NOT_SELECTED) && !industry.equals(e.getIndustry())) {
+			else if( !industry.equals(INDUSTRY_NOT_SELECTED) && !industry.equals(e.getIndustry())) {		//industry filter
 				experiencesToRemove.add(e);
 			} 
-			else if( !year.equals(YEAR_NOT_SELECTED) && !year.equals(e.getYear())) {
+			else if( !year.equals(YEAR_NOT_SELECTED) && !year.equals(e.getYear())) {		//year (class standing) filter
 				experiencesToRemove.add(e);
 			} 
-			else if( !hours.equals(HOURS_NOT_SELECTED) && !hours.equals(e.getHoursPerWeek())) {
+			else if( !hours.equals(HOURS_NOT_SELECTED) && !hours.equals(e.getHoursPerWeek())) {		//hours filter
 				experiencesToRemove.add(e);
 			} 
-			else if( !compensation.equals(COMPENSATION_NOT_SELECTED) && !compensation.equals(e.getCompensation())) {
+			else if( !compensation.equals(COMPENSATION_NOT_SELECTED) && !compensation.equals(e.getCompensation())) {		//compensation filter
 				experiencesToRemove.add(e);
 			} 
-			else if( !international.equals(INTERNATIONAL_NOT_SELECTED) && !international.equals(e.getInternational())) {
+			else if( !international.equals(INTERNATIONAL_NOT_SELECTED) && !international.equals(e.getInternational())) {		//international filter
 				experiencesToRemove.add(e);
 			} 
-			else if( !internship.equals(INTERNSHIP_NOT_SELECTED) && !internship.equals(e.getInternship())) {
+			else if( !internship.equals(INTERNSHIP_NOT_SELECTED) && !internship.equals(e.getInternship())) {		//internship filter
 				experiencesToRemove.add(e);
 			}
 		}
-		matchingExperiences.removeAll(experiencesToRemove);
+		matchingExperiences.removeAll(experiencesToRemove);		//removes non-matching Experiences
 		return matchingExperiences;
 	}
 	

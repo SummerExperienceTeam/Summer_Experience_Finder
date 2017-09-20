@@ -6,20 +6,6 @@
  */
 public class Experience 
 {
-	public enum StudentStanding
-	{
-		SOPHMORE, JUNIOR, SENIOR
-	}
-	public enum CompensationType
-	{
-		UNPAID,HOURLY,STIPEND
-	}
-	public enum MainActivity
-	{
-		CCBLOCK, MUSIC, TIMEOFFTRAVELING, STUDYABROAD, SUMMERJOB, 
-		CLASSOTHERINSTITUTION, RESEARCH, VOLUNTEERING
-		
-	}
 	
 	private String year;
 	private String international;
@@ -31,6 +17,19 @@ public class Experience
 	private String hoursPerWeek;
 	private String compensation;
 	
+	
+	/**
+	 * constructor. Assigns attributes from params
+	 * @param year
+	 * @param international
+	 * @param internship
+	 * @param organization
+	 * @param state
+	 * @param city
+	 * @param natureOfWork
+	 * @param hoursPerWeek
+	 * @param compensation
+	 */
 	public Experience(String year, String international, String internship, String organization, String state,
 			String city,  String natureOfWork, String hoursPerWeek,
 			String compensation) 
@@ -43,7 +42,11 @@ public class Experience
 		this.city = city;
 		this.industry = natureOfWork;
 		this.hoursPerWeek = hoursPerWeek;
-		this.compensation = compensation;
+		if(compensation != null) {
+			this.compensation = compensation.trim();	//to handle extra blank space at end
+		} else {
+			this.compensation = compensation;
+		}
 	}
 
 	public String getYear() {

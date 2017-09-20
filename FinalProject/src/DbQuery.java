@@ -45,8 +45,8 @@ public class DbQuery extends JFrame {
 	public static SummerExperienceGUI gui;
 
 	
-	ArrayList<Experience> experiences = null;
-	DatabaseConverter dbFilter = new DatabaseConverter();
+	private ArrayList<Experience> experiences = null;
+	private DatabaseConverter dbFilter = new DatabaseConverter();
 	
 
 	public static void main(String[] args) throws SQLException {
@@ -56,15 +56,16 @@ public class DbQuery extends JFrame {
 
 	}
 
-
+/**
+ * Constructor.
+ * gets the ArrayList of all experiences and assigns it to class attribute. 
+ */
 	public DbQuery() {
 		
 		experiences = null;
 		try
 		{
-	
-			experiences = (ArrayList<Experience>) dbFilter.getAllExperiences();
-						
+			experiences = (ArrayList<Experience>) dbFilter.getAllExperiences();					
 		}
 		catch (Exception exc) {
 			System.out.println(exc); 

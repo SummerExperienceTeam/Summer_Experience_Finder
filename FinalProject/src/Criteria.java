@@ -1,4 +1,9 @@
-
+/**
+ * Class for criteria objects
+ * Used to encapsulate the menu and button choices in Gui. 
+ * @author Oliver
+ *
+ */
 public class Criteria {
 	private String state;
 	private String industry;
@@ -8,6 +13,16 @@ public class Criteria {
 	private String international;
 	private String internship;
 	
+	/**
+	 * constructor for Criteria object.
+	 * @param state
+	 * @param industry
+	 * @param year
+	 * @param hours
+	 * @param compensation
+	 * @param international
+	 * @param internship
+	 */
 	public Criteria (String state, String industry, String year, String hours, String compensation, String international, String internship) {
 		this.state = state;
 		this.industry = industry;

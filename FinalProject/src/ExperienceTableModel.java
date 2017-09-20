@@ -21,8 +21,8 @@ class ExperienceTableModel extends AbstractTableModel {
 	private static final int HRS = 7;
 	private static final int COMPENSATION = 8;
 
-	private String[] columnNames = { "What is your class standing?",  "International",  "Internship",  "State",  "Org",
-			 "City",   "Industry",  "Hrs",
+	private String[] columnNames = { "Class Standing",  "International Y/N",  "Internship Y/N",  "State",  "Organization",
+			 "City",   "Industry",  "HrsPerWeek",
 			 "Compensation",  };
 	private List<Experience> experiences;
 

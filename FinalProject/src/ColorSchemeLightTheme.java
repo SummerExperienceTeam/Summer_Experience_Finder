@@ -1,5 +1,9 @@
 import java.awt.Color;
-
+/**
+ * concrete implementation of ColorSchemeStrategy
+ * @author Nick
+ *
+ */
 public class ColorSchemeLightTheme implements ColorSchemeStrategy {
 
 	private Color colorOne;
@@ -10,7 +14,7 @@ public class ColorSchemeLightTheme implements ColorSchemeStrategy {
 	private Color fontColor;
 	public ColorSchemeLightTheme()
 	{
-		//Where the concrete colorscheme is defined
+		//Where the concrete color scheme is defined
 		this.colorOne = convertFXColorToSwingColor(javafx.scene.paint.Color.GHOSTWHITE); //Dark
 		this.colorTwo = convertFXColorToSwingColor(javafx.scene.paint.Color.WHITE); //Light
 		this.colorThree = convertFXColorToSwingColor(javafx.scene.paint.Color.LIGHTGRAY);

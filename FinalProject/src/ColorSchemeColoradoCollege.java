@@ -1,8 +1,9 @@
-
-
-
 import java.awt.Color;
-
+/**
+ * concrete implementation of ColorSchemeStrategy
+ * @author Nick
+ *
+ */
 public class ColorSchemeColoradoCollege implements ColorSchemeStrategy
 {
 
@@ -14,7 +15,7 @@ public class ColorSchemeColoradoCollege implements ColorSchemeStrategy
 	private Color fontColor;
 	public ColorSchemeColoradoCollege()
 	{
-		//Where the concrete colorscheme is defined
+		//Where the concrete color scheme is defined
 		colorOne = convertFXColorToSwingColor(javafx.scene.paint.Color.GHOSTWHITE); //Dark
 		colorTwo = convertFXColorToSwingColor(javafx.scene.paint.Color.GOLDENROD); //Light
 		colorThree = convertFXColorToSwingColor(javafx.scene.paint.Color.DARKGOLDENROD);

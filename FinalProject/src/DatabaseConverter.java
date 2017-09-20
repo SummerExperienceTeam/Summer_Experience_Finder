@@ -102,14 +102,14 @@ public static List<Experience> searchExperiences() throws Exception {
 public static Experience convertRowToExperience(ResultSet myResults) throws SQLException {
 	
 	String year = myResults.getString("Question1"); 
-	String international = myResults.getString("Question2"); // 22 , 11 , 12 , 21 
-	String internship = myResults.getString("Question3"); //leave = did u intership  
-	String org = myResults.getString("Question4"); //leave = state internship
-	String state = myResults.getString("Question5"); // leave = city of internship
-	String city = myResults.getString("Question6"); // leave questoin 4 = org 
-	String industry = myResults.getString("Question7"); // leave = nature of work
-	String hoursPerWeek = myResults.getString("Question8"); // leave = hrs per week
-	String compensation = myResults.getString("Question9"); // leave  = compensation
+	String international = myResults.getString("Question2"); 
+	String internship = myResults.getString("Question3");   
+	String org = myResults.getString("Question4"); 
+	String state = myResults.getString("Question5"); 
+	String city = myResults.getString("Question6");
+	String industry = myResults.getString("Question7"); 
+	String hoursPerWeek = myResults.getString("Question8"); 
+	String compensation = myResults.getString("Question9"); 
 	
 	Experience tempExperience = new Experience(year, international, internship, org, state, city, industry, hoursPerWeek, compensation );	
 	return tempExperience;

@@ -5,8 +5,18 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Scanner;
 
+/**Simple class containing method to create String[] from txt file
+ * 
+ * @author Nick
+ *
+ */
 public class GuiFileIO
 {
+	/**
+	 * gets a string[] from a txt file.
+	 * @param fileName
+	 * @return
+	 */
 	public String[] getFileLinesAsStringArray(String fileName)
 	{
 		 try
