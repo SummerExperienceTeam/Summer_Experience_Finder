@@ -9,6 +9,7 @@ import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
@@ -48,9 +49,8 @@ public class DbQuery extends JFrame {
 	DatabaseConverter dbFilter = new DatabaseConverter();
 	
 
-	public static void main(String[] args) {
-
-		createSingletonDatabase DBinstance;
+	public static void main(String[] args) throws SQLException {
+		
 		createSingletonDatabase.getInstance();
 		DbQuery runQuery = new DbQuery();
 

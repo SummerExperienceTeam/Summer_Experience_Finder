@@ -14,7 +14,7 @@ import java.sql.SQLException;
 public class createSingletonDatabase {
 
 	private static final String PORT_NUMBER = "8889";
-	private static createSingletonDatabase singleDBConnection;
+	private volatile static createSingletonDatabase singleDBConnection = null;
 	
 	/**
 	 * Private constructor for the purpose of a singleton implementation. 
@@ -30,25 +30,44 @@ public class createSingletonDatabase {
 	/**
 	 * 
 	 * @return createSingletonDatabase class, returns a unique instance of the creation of a databse.
+	 * @throws SQLException 
 	 */
-	public static createSingletonDatabase getInstance()
+	public static createSingletonDatabase getInstance() throws SQLException
 	{
-		if (singleDBConnection == null)
+		Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:" + PORT_NUMBER + "/", 
+				"root", "root"); // MySQL
+		ResultSet resultSet = conn.getMetaData().getCatalogs();
+
+		//iterate each catalog in the ResultSet
+		boolean databaseExists = false;
+		while (resultSet.next()) {
+		  // Get the database name, which is at position 1
+		  String databaseName = resultSet.getString(1);
+		  if(databaseName.equals("experiences")){
+              databaseExists = true;
+          }
+		}
+		resultSet.close();
+		
+		if (singleDBConnection == null && (!databaseExists))
 		{
 			synchronized (createSingletonDatabase.class) {
-			if (singleDBConnection == null)
-			{
-				singleDBConnection = new createSingletonDatabase();
-			}
+				if (singleDBConnection == null)
+				{
+					singleDBConnection = new createSingletonDatabase();
+				}
 			}
 		}
 		return singleDBConnection;
 	}
+	
+	
 	/**
 	 * createDatabase() is an internal helper method which enables the creation of a database central to our experience
 	 * project.
 	 */
 	private Connection createDatabase() {
+		System.out.println("We are creating a database");
 		try (
 				// Step 1: Allocate a database "Connection" object
 				Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:" + PORT_NUMBER + "/", 
@@ -73,6 +92,7 @@ public class createSingletonDatabase {
 	 */
 		
 	private Connection createTable() {
+		System.out.println("We are creating a table");
 		try (
 				// Step 1: Allocate a database "Connection" object
 				Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:" + PORT_NUMBER + "/experiences?user=root&password=root"); // MySQL
