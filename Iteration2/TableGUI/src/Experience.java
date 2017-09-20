@@ -20,40 +20,41 @@ public class Experience
 		CLASSOTHERINSTITUTION, RESEARCH, VOLUNTEERING
 		
 	}
+	
+	private String standing;
 	private String international;
 	private String internship;
 	private String organization;
 	private String state;
 	private String city;
 	private String natureOfWork;
-	private String addtionalInformation;
 	private String hoursPerWeek;
-	private String standing;
 	private String compensation;
-	private String activity;
 	
-	public Experience(String international, String internship, String organization, String state, String city,
-			String natureOfWork,  String hoursPerWeek, String standing,
+	public Experience(String standing, String international, String internship, String organization, String state,
+			String city,  String natureOfWork, String hoursPerWeek,
 			String compensation) 
 	{
+		this.standing = standing;
 		this.international = international;
 		this.internship = internship;
 		this.organization = organization;
 		this.state = state;
 		this.city = city;
 		this.natureOfWork = natureOfWork;
-		this.addtionalInformation = addtionalInformation;
 		this.hoursPerWeek = hoursPerWeek;
-		this.standing = standing;
 		this.compensation = compensation;
-		this.activity = activity;
 	}
 
-	public String isInternational() {
+	public String getStanding() {
+		return standing;
+	}
+
+	public String getInternational() {
 		return international;
 	}
 
-	public String isInternship() {
+	public String getInternship() {
 		return internship;
 	}
 
@@ -64,7 +65,7 @@ public class Experience
 	public String getState() {
 		return state;
 	}
-	
+
 	public String getCity() {
 		return city;
 	}
@@ -73,20 +74,12 @@ public class Experience
 		return natureOfWork;
 	}
 
-
 	public String getHoursPerWeek() {
 		return hoursPerWeek;
-	}
-
-	public String getStanding() {
-		return standing;
 	}
 
 	public String getCompensation() {
 		return compensation;
 	}
-
-	
-	
 
 }

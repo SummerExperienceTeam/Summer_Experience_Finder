@@ -11,15 +11,15 @@ import javax.swing.table.AbstractTableModel;
  */
 
 class ExperienceTableModel extends AbstractTableModel {
-	private static final int CLASS_STADNING = 1;
-	private static final int INTERNATIONAL = 2;
-	private static final int INTERNSHIP = 3;
+	private static final int CLASS_STADNING = 0;
+	private static final int INTERNATIONAL = 1;
+	private static final int INTERNSHIP = 2;
+	private static final int STATE = 3;
 	private static final int ORG = 4;
-	private static final int STATE = 5;
-	private static final int CITY = 6;
-	private static final int NATURE = 7;
-	private static final int HRS = 8;
-	private static final int COMPENSATION = 9;
+	private static final int CITY = 5;
+	private static final int NATURE = 6;
+	private static final int HRS = 7;
+	private static final int COMPENSATION = 8;
 
 	private String[] columnNames = { "standing",  "international",  "internship",  "org",  "state",
 			 "city",   "nature",  "hrs",
@@ -54,9 +54,9 @@ class ExperienceTableModel extends AbstractTableModel {
 		case CLASS_STADNING:
 			return tempExperiences.getStanding();
 		case INTERNATIONAL:
-			return tempExperiences.isInternational();
+			return tempExperiences.getInternational();
 		case INTERNSHIP:
-			return tempExperiences.isInternship();
+			return tempExperiences.getInternship();
 		case ORG:
 			return tempExperiences.getOrganization();
 		case STATE:
@@ -70,7 +70,7 @@ class ExperienceTableModel extends AbstractTableModel {
 		case COMPENSATION:
 			return tempExperiences.getCompensation();
 		default:
-			return tempExperiences.getCompensation();
+			return null;
 		}
 	}
 

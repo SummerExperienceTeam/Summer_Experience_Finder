@@ -103,17 +103,19 @@ public static Experience convertRowToExperience(ResultSet myResults) throws SQLE
 	
 	
 	String classStanding = myResults.getString("Question1"); 
-	String compensation = myResults.getString("Question2"); // 22 , 11 , 12 , 21 
-	String participate = myResults.getString("Question4"); // leave questoin 4 = org 
-	String decision = myResults.getString("Question3"); //leave = did u intership  
-	String org = myResults.getString("Question5"); //leave = state internship
-	String state = myResults.getString("Question6"); // leave = city of internship
-	String city = myResults.getString("Question7"); // leave = nature of work
-	String natureOfWork = myResults.getString("Question8"); // leave = hrs per week
-	String hoursPerWeek = myResults.getString("Question9"); // leave  = compensation
+	String international = myResults.getString("Question2"); // 22 , 11 , 12 , 21 
+	String internship = myResults.getString("Question3"); //leave = did u intership  
+	String state = myResults.getString("Question4"); //leave = state internship
+	String org = myResults.getString("Question5"); // leave questoin 4 = org 
+	String city = myResults.getString("Question6"); // leave = city of internship
+	String natureOfWork = myResults.getString("Question7"); // leave = nature of work
+	String hoursPerWeek = myResults.getString("Question8"); // leave = hrs per week
+	String compensation = myResults.getString("Question9"); // leave  = compensation
 	
 	
-	Experience tempExperience = new Experience(decision, participate, org, state, city, natureOfWork, hoursPerWeek, compensation, classStanding );	
+//	Experience tempExperience = new Experience(internship, state, org, city, natureOfWork, hoursPerWeek, compensation, international, classStanding );	
+//	return tempExperience;
+	Experience tempExperience = new Experience(classStanding, international, internship, org, state, city, natureOfWork, hoursPerWeek, compensation );	
 	return tempExperience;
 }
 
