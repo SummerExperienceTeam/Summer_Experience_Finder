@@ -79,22 +79,18 @@ public class DbQuery extends JFrame {
 		//btnSearch = new JButton("Search");
 		//panel.add(btnSearch);
 		
-		scrollPane = new JScrollPane();
-		contentPane.add(scrollPane, BorderLayout.CENTER);
-		
-		table = new JTable();
-		scrollPane.setViewportView(table);
-		
-	
-	
-		
 		String[] filterNames = { "Select State ", "Alabama", "Alaska", "Arkansas", "California" };
 		JComboBox filterList = new JComboBox(filterNames);
 		panel.add(filterList );
 		
 
 		
+		scrollPane = new JScrollPane();
+		contentPane.add(scrollPane, BorderLayout.CENTER);
 		
+		table = new JTable();
+		scrollPane.setViewportView(table);
+
 		btnSearch = new JButton("Search");  
 		panel.add(btnSearch) ;
 		btnSearch.addActionListener(new ActionListener() {
@@ -102,7 +98,7 @@ public class DbQuery extends JFrame {
 				// Get data from the text field
 
 				
-				
+
 				try {
 					String searchQuery = databaseTextField.getText();
 					
