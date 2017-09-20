@@ -68,9 +68,11 @@ public class SummerExperienceGUI
 	public JButton searchButton;
 	public JButton restorePreviousSearchButton;
 	public JButton resetButton;
+	public JButton colorSchemeButton;
 	private JTable fullTable;
 	private JTable currentDisplayedTable;
 	
+	private ColorSchemeStrategy colorScheme; 
 	//Stack for commands
 	private Stack<guiCommand> commands = new Stack<guiCommand>();
 	
@@ -79,13 +81,14 @@ public class SummerExperienceGUI
 	public static String INTERNATIONAL_STRING = "Yes";
 	public static String INTERNSHIP_STRING = "Yes";
 	
-	//ColorScheme below
-	private Color colorOne = convertFXColorToSwingColor(javafx.scene.paint.Color.BLACK); //Dark
-	private Color colorTwo = convertFXColorToSwingColor(javafx.scene.paint.Color.GOLDENROD); //Light
-	private Color colorThree = convertFXColorToSwingColor(javafx.scene.paint.Color.DARKGOLDENROD);
-	private Color colorFour = convertFXColorToSwingColor(javafx.scene.paint.Color.GOLD);
-	private Color colorFive = convertFXColorToSwingColor(javafx.scene.paint.Color.GHOSTWHITE);
-	private Color fontColor = Color.BLACK;
+	//Colors below. Assigned by constructor, then can be reassigned switchColorScheme()
+	private Color colorOne;
+	private Color colorTwo;
+	private Color colorThree;
+	private Color colorFour;
+	private Color colorFive;
+	private Color fontColor;
+	private int colorInt = 0; // this int tells switchColorScheme which colorScheme to switch to next. 
 	
 	
 	//Instance of utility class
@@ -101,6 +104,15 @@ public class SummerExperienceGUI
 	
 	public SummerExperienceGUI(ArrayList<Experience> experiences)
 	{
+		//Default color scheme is set
+		this.colorScheme = new ColorSchemeColoradoCollege();
+		colorOne = colorScheme.getColorOne(); //Dark
+		colorTwo = colorScheme.getColorTwo(); //Light
+		colorThree = colorScheme.getColorThree();
+		colorFour = colorScheme.getColorFour();
+		colorFive = colorScheme.getColorFive();
+		fontColor = colorScheme.getFontColor();
+		// this needs to go away at some point. 
 		this.experiences = experiences;
 	}
 	
@@ -116,13 +128,62 @@ public class SummerExperienceGUI
 	 * @return
 	 */
 	
+	/**
+	 * This method switches the color scheme along a rotation between three schemes. 
+	 */
+	public void switchColorScheme()
+	{
+		System.out.println(colorInt);
+		if(colorInt ==0)
+		{
+			colorScheme = new ColorSchemeDarkTheme();
+			colorInt++;
+		}
+		else if(colorInt ==1)
+		{
+			colorScheme = new ColorSchemeLightTheme();
+			colorInt++;
+		}
+		else
+		{
+			colorScheme = new ColorSchemeColoradoCollege();
+			colorInt = 0;
+		}
+		
+		//Update colors and refresh
+		colorOne = colorScheme.getColorOne(); 
+		colorTwo = colorScheme.getColorTwo(); 
+		colorThree = colorScheme.getColorThree();
+		colorFour = colorScheme.getColorFour();
+		colorFive = colorScheme.getColorFive();
+		fontColor = colorScheme.getFontColor();
+		updateColors();
+		refreshGui();
+	}
+	
+	
+	public void updateColors()
+	{
+		mainPane.setBorder(BorderFactory.createLineBorder(colorThree));
+		mainPane.setBackground(colorTwo);
+		scrollPane.setBorder(BorderFactory.createBevelBorder(3,colorThree, colorFour));
+		outputText.setBackground(Color.WHITE);
+		outputText.setForeground(fontColor);
+		scrollPane.setBackground(colorTwo);
+		fullTable.setBackground(colorFive);
+		fullTable.setForeground(fontColor);
+	}
+	
 	
 	public void refreshGui()
 	{
 		mainPane.revalidate();
 		mainPane.setVisible(true);
 		masterFrame.validate();
+		
 	}
+	
+	
 	public String experienceObjectListToString(ArrayList<Experience> experiences)
 	{
 		String experiencesString = "";
@@ -302,6 +363,14 @@ public class SummerExperienceGUI
 		c.gridy = 0;
 		mainPane.add(resetButton, c);
 		
+		
+		colorSchemeButton = new JButton("Change Color Scheme");
+		c.weightx = 0.5;
+		c.fill = GridBagConstraints.HORIZONTAL;
+		c.gridx = 0;
+		c.gridy = 2;
+		mainPane.add(colorSchemeButton, c);
+		
 		//__________________________________________________________________________________________________________
 
 		//Sets up the Text are where output will go.
@@ -326,7 +395,7 @@ public class SummerExperienceGUI
 		c.gridwidth = 18;
 		c.gridheight = 18;
 		c.gridx = 0;
-		c.gridy = 2;
+		c.gridy = 3 ;
 		mainPane.add(scrollPane, c);
 		mainPane.revalidate();
 		mainPane.setVisible(true);
@@ -349,20 +418,15 @@ public class SummerExperienceGUI
 					String search = previousSearch.getSearchCriteria();
 					outputText.setText(search);
 					previousSearch.undoCommand();
-					refreshGui();
-					
+					refreshGui();				
 				}
 				else
 				{
 					//Not printing temporary error string into text area for whatever reason. Can't figure it out. 
-					
-					System.out.println("HERE");
-			
 					String current = outputText.getText();
 					outputText.setText("No last search to restore.");
 					scrollPane.setViewportView(outputText);
 					refreshGui();
-					
 					try
 					{
 						refreshGui();
@@ -407,7 +471,15 @@ public class SummerExperienceGUI
 				String search = searchCommand.getSearchCriteria();
 				outputText.setText(search);
 				refreshGui();
-				
+			}
+		} );
+		
+		colorSchemeButton.addActionListener(new ActionListener() 
+		{
+			@Override
+			public void actionPerformed(ActionEvent e) 
+			{
+				switchColorScheme();	
 			}
 		} );
 		
