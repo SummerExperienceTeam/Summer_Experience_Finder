@@ -4,14 +4,51 @@ import java.sql.Statement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class createDatabase {
+/**
+ * 
+ * @author Pietro inspired by http://codethataint.com/blog/using-singleton-class-for-db-connection-java/
+ * The following class ensures the delicate process of creating a database is restricted to one instance amongst all
+ * threads. Thus, utilizing the Singleton design principle the constructor is encapsulated and made private.
+ */
 
-	public static final String PORT_NUMBER = "8889";
+public class createSingletonDatabase {
+
+	private static final String PORT_NUMBER = "8889";
+	private static createSingletonDatabase singleDBConnection;
+	
 	/**
-	 * Creates a database for us to work with 
-	 *
+	 * Private constructor for the purpose of a singleton implementation. 
 	 */
-	public Connection createDatabase() {
+	private createSingletonDatabase()
+	{
+		Connection conn = createDatabase();
+		createTable();
+		String filename = "Summer expereince survey 2016 for oliver.csv"; 
+		importData(conn, filename);
+	}
+	
+	/**
+	 * 
+	 * @return createSingletonDatabase class, returns a unique instance of the creation of a databse.
+	 */
+	public static createSingletonDatabase getInstance()
+	{
+		if (singleDBConnection == null)
+		{
+			synchronized (createSingletonDatabase.class) {
+			if (singleDBConnection == null)
+			{
+				singleDBConnection = new createSingletonDatabase();
+			}
+			}
+		}
+		return singleDBConnection;
+	}
+	/**
+	 * createDatabase() is an internal helper method which enables the creation of a database central to our experience
+	 * project.
+	 */
+	private Connection createDatabase() {
 		try (
 				// Step 1: Allocate a database "Connection" object
 				Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:" + PORT_NUMBER + "/", 
@@ -31,12 +68,11 @@ public class createDatabase {
 	}
 		
 	/**
-	 * creates a table in our database, adds the title "question x" to each 
-	 * 
-	 *
+	 * Creates a table in our database, adds the title "question x" to each 
+	 * @return connection which is used to upload and create the database on myPHPadmin
 	 */
 		
-	public Connection createTable() {
+	private Connection createTable() {
 		try (
 				// Step 1: Allocate a database "Connection" object
 				Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:" + PORT_NUMBER + "/experiences?user=root&password=root"); // MySQL
@@ -66,9 +102,10 @@ public class createDatabase {
 			
 	/**
 	 * imports a csv excel file to the table in our database 
-	 *
+	 * @param conn (the connection to myphpadmin) and filename (the csv excel filename)
+	 * returns void, it is simply a helper method to populate the database
 	 */
-	public void importData(Connection conn,String filename)
+	private void importData(Connection conn,String filename)
     {
 		
         Statement stmt;
@@ -105,18 +142,4 @@ public class createDatabase {
             stmt = null;
         }
     }
-
-	/**
-	 * calls the above methods to run all the code that creates a database, table, and popoulates a database 
-	 *
-	 */
-	public static void main(String[] args) {
-		createDatabase dbCreator = new createDatabase();
-		Connection conn = dbCreator.createDatabase();
-		dbCreator.createTable();
-		String filename = "Summer expereince survey 2016 for oliver.csv"; 
-		dbCreator.importData(conn, filename);
-		
-		
 }
-	}

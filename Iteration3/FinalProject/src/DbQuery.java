@@ -49,16 +49,14 @@ public class DbQuery extends JFrame {
 	
 
 	public static void main(String[] args) {
-		
-	       
-	        DbQuery runQuery = new DbQuery();  
-	    }
+
+		createSingletonDatabase DBinstance;
+		createSingletonDatabase.getInstance();
+		DbQuery runQuery = new DbQuery();
+
+	}
 
 
-
-
-
-	
 	public DbQuery() {
 		
 		experiences = null;
